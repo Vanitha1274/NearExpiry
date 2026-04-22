@@ -1,0 +1,234 @@
+:root {
+  --green-light: #e6f4ea;
+  --green-primary: #388e3c;
+  --green-dark: #2e7d32;
+  --text-dark: #333;
+  --white: #fff;
+  --font-main: 'Segoe UI', sans-serif;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-main);
+  background-color: var(--white);
+  color: var(--text-dark);
+}
+
+/* Header */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--green-light);
+  padding: 1rem 2rem;
+  flex-wrap: wrap;
+}
+
+.logo {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: var(--green-dark);
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.customer-btn {
+  background-color: var(--green-primary);
+  color: var(--white);
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  font-size: 0.9rem;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: var(--text-dark);
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  background-color: var(--white);
+  border: 1px solid var(--green-primary);
+  border-radius: 5px;
+  padding: 0.3rem 0.5rem;
+}
+
+.search-bar input {
+  border: none;
+  outline: none;
+  padding: 0.3rem;
+  font-size: 0.9rem;
+}
+
+/* Banner */
+.banner {
+  background-color: var(--green-light);
+  padding: 2rem;
+  text-align: center;
+}
+
+.banner h1 {
+  color: var(--green-dark);
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+}
+
+.benefits {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.benefit {
+  background-color: var(--white);
+  border: 1px solid var(--green-primary);
+  padding: 0.8rem 1rem;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  width: 250px;
+  text-align: center;
+}
+
+/* Categories */
+.categories {
+  padding: 2rem;
+  text-align: center;
+}
+
+.categories h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.category-grid {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.category-card {
+  background-color: var(--green-primary);
+  color: var(--white);
+  padding: 1rem;
+  border-radius: 8px;
+  width: 200px;
+  font-size: 1rem;
+}
+
+/* Deals */
+.deals {
+  padding: 2rem;
+  text-align: center;
+}
+
+.deals h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.deal-grid {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.deal-card {
+  border: 1px solid var(--green-light);
+  padding: 1rem;
+  border-radius: 8px;
+  width: 220px;
+  text-align: center;
+  background-color: var(--white);
+}
+
+.deal-card img {
+  width: 100%;
+  border-radius: 5px;
+  margin-bottom: 0.5rem;
+}
+
+.expiry {
+  font-size: 0.9rem;
+  margin: 0.3rem 0;
+}
+
+.discount {
+  font-size: 1rem;
+  font-weight: bold;
+  color: var(--green-dark);
+}
+
+.buy-btn {
+  background-color: var(--green-dark);
+  color: var(--white);
+  border: none;
+  padding: 0.5rem;
+  border-radius: 5px;
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+}
+
+/* How It Works */
+.how-it-works {
+  padding: 2rem;
+  background-color: #f1f8e9;
+  text-align: center;
+}
+
+.how-it-works h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.steps-grid {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.step-card {
+  background-color: var(--white);
+  border: 1px solid var(--green-primary);
+  padding: 1rem;
+  border-radius: 8px;
+  width: 250px;
+  font-size: 0.95rem;
+}
+
+/* Footer */
+.footer {
+  background-color: var(--green-dark);
+  color: var(--white);
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.9rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .nav-right {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .benefits,
+  .category-grid,
+  .deal-grid,
+  .steps-grid {
+    flex-direction: column;
+    align-items: center;
+  }
+}

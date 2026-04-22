@@ -1,0 +1,148 @@
+:root {
+  --bg: #e7f5e8;
+  --text: #111;
+  --primary: #27a745;
+  --primary-dark: #1f8a37;
+  --accent: #f4a300;
+}
+
+body.signup-bg {
+  margin: 0;
+  font-family: "Segoe UI", Roboto, Inter, sans-serif;
+  background: var(--bg);
+  animation: fadeIn 0.8s ease-in;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideInLeft {
+  from { transform: translateX(-100px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slideInRight {
+  from { transform: translateX(100px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slideInUp {
+  from { transform: translateY(50px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.signup-wrap {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  min-height: 100vh;
+}
+
+/* Left panel */
+.left-panel {
+  background: #fff;
+  padding: 48px 24px;
+  text-align: center;
+  animation: slideInLeft 0.8s ease-out 0.2s both;
+}
+.title {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 16px;
+}
+.brand-logo {
+  width: 140px;
+  margin-bottom: 12px;
+}
+.brand-name {
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 6px;
+}
+.brand-tagline {
+  font-size: 16px;
+  color: #555;
+}
+
+/* Right panel */
+.right-panel {
+  padding: 48px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: slideInRight 0.8s ease-out 0.4s both;
+}
+.signup-form {
+  width: 100%;
+  max-width: 480px;
+  display: grid;
+  gap: 16px;
+}
+.signup-form input {
+  padding: 12px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  animation: slideInUp 0.5s ease-out calc(0.6s + var(--input-delay, 0s)) both;
+  transition: all 0.3s ease;
+}
+
+.signup-form input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 8px rgba(39, 167, 69, 0.2);
+  transform: scale(1.02);
+}
+
+.signup-form input:nth-child(1) { --input-delay: 0.1s; }
+.signup-form input:nth-child(2) { --input-delay: 0.15s; }
+.signup-form input:nth-child(3) { --input-delay: 0.2s; }
+.signup-form .password-row { --input-delay: 0.25s; }
+.signup-form input:nth-child(5) { --input-delay: 0.3s; }
+.signup-form input:nth-child(6) { --input-delay: 0.35s; }
+.signup-form input:nth-child(7) { --input-delay: 0.4s; }
+.password-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.btn-signup {
+  background: var(--primary);
+  color: white;
+  font-weight: bold;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  animation: slideInUp 0.6s ease-out 1s both;
+  transition: all 0.3s ease;
+}
+.btn-signup:hover {
+  background: var(--primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(39, 167, 69, 0.3);
+}
+.signin-link {
+  text-align: center;
+  font-size: 14px;
+  color: var(--accent);
+  animation: fadeIn 0.6s ease-out 1.2s both;
+}
+.signin-link a {
+  font-weight: bold;
+  color: #000;
+  text-decoration: none;
+}
+.signin-link a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .signup-wrap {
+    grid-template-columns: 1fr;
+  }
+  .left-panel {
+    padding-bottom: 24px;
+  }
+}
