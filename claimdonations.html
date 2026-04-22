@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Claimed & Pending Donations</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #fff;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      color: #333;
+      animation: fadeIn 0.8s ease-in;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes slideInDown {
+      from { transform: translateY(-50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    @keyframes slideInLeft {
+      from { transform: translateX(-80px); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+
+    @keyframes slideInRight {
+      from { transform: translateX(80px); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+
+    @keyframes slideInUp {
+      from { transform: translateY(50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .container {
+      max-width: 600px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 2.5em;
+      margin-bottom: 10px;
+      line-height: 1.2;
+      animation: slideInDown 0.8s ease-out 0.2s both;
+    }
+
+    .section-title {
+      font-size: 1.5em;
+      margin-top: 30px;
+      margin-bottom: 15px;
+      color: #1565c0;
+      animation: slideInLeft 0.6s ease-out calc(0.4s + var(--section-delay, 0s)) both;
+    }
+
+    .instruction {
+      font-size: 1em;
+      margin-bottom: 20px;
+    }
+
+    .donation-list {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .donation-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 15px;
+      background-color: #f0f8ff;
+      text-align: left;
+      animation: slideInUp 0.5s ease-out calc(0.6s + var(--item-delay, 0s)) both;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .donation-item:hover {
+      transform: translateX(10px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    }
+
+    .donation-details {
+      flex-grow: 1;
+    }
+
+    .donation-details h3 {
+      margin: 0 0 8px;
+      font-size: 1.1em;
+      color: #1565c0;
+    }
+
+    .donation-details p {
+      margin: 4px 0;
+      font-size: 0.95em;
+    }
+
+    .claimed-btn {
+      background-color: #2e7d32;
+      color: white;
+      border: none;
+      padding: 8px 14px;
+      font-size: 0.9em;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .claimed-btn:hover {
+      background-color: #256628;
+      transform: scale(1.05);
+    }
+
+    .pending-btn {
+      background-color: #f57c00;
+      color: white;
+      border: none;
+      padding: 8px 14px;
+      font-size: 0.9em;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      animation: pulse 2s infinite;
+    }
+
+    .pending-btn:hover {
+      background-color: #e65100;
+      transform: scale(1.05);
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.02); }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Claimed & Pending Donations</h1>
+    <p class="instruction">Track your claimed and pending donations below:</p>
+
+    <!-- Claimed Section -->
+    <div class="section-title" style="--section-delay: 0.1s;">Claimed Donations</div>
+    <div class="donation-list">
+      <div class="donation-item" style="--item-delay: 0.1s;">
+        <div class="donation-details">
+          <h3>Food & Snacks: Biscuits</h3>
+          <p>Claimed on: September 28, 2025</p>
+          <p>Quantity: 15</p>
+        </div>
+        <button class="claimed-btn">Claimed</button>
+      </div>
+
+      <div class="donation-item" style="--item-delay: 0.2s;">
+        <div class="donation-details">
+          <h3>Beverage: Juice Pack</h3>
+          <p>Claimed on: September 29, 2025</p>
+          <p>Quantity: 20</p>
+        </div>
+        <button class="claimed-btn">Claimed</button>
+      </div>
+    </div>
+
+    <!-- Pending Section -->
+    <div class="section-title" style="--section-delay: 0.3s;">Pending Donations</div>
+    <div id="pending-list" class="donation-list">
+      <!-- Dynamic pending donations will be loaded here -->
+    </div>
+    <div id="no-pending" style="display: none; color: #666; margin: 20px 0; animation: fadeIn 0.6s ease-out 1.2s both;">No pending donations.</div>
+  </div>
+
+  <script>
+    function loadPendingDonations() {
+      const claimedDonations = JSON.parse(localStorage.getItem('claimedDonations') || '[]');
+      const pendingContainer = document.getElementById('pending-list');
+      const noPending = document.getElementById('no-pending');
+      
+      if (claimedDonations.length === 0) {
+        noPending.style.display = 'block';
+        return;
+      }
+      
+      pendingContainer.innerHTML = '';
+      
+      claimedDonations.forEach((donation, index) => {
+        const item = document.createElement('div');
+        item.className = 'donation-item';
+        item.style.setProperty('--item-delay', `${0.4 + (index * 0.1)}s`);
+        
+        item.innerHTML = `
+          <div class="donation-details">
+            <h3>${donation.productName}</h3>
+            <p>Claimed on: ${donation.claimedDate}</p>
+            <p>Status: Pending Approval</p>
+          </div>
+          <button class="pending-btn">Pending</button>
+        `;
+        pendingContainer.appendChild(item);
+      });
+    }
+    
+    // Load pending donations when page loads
+    loadPendingDonations();
+  </script>
+</body>
+</html>

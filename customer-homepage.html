@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>NearXpiry - Customer</title>
+  <link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+/>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f8fafc;
+      color: #2e2e2e;
+      animation: fadeIn 0.8s ease-in;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes slideInLeft {
+      from { transform: translateX(-100px); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+
+    @keyframes slideInRight {
+      from { transform: translateX(100px); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+
+    @keyframes slideInDown {
+      from { transform: translateY(-50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    @keyframes slideInUp {
+      from { transform: translateY(50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    @keyframes zoomIn {
+      from { transform: scale(0.8); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* Header */
+    header {
+      background: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 40px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+      font-size: 14px;
+      position: relative;
+      animation: slideInDown 0.6s ease-out;
+    }
+
+    .logo {
+      font-family: 'Georgia', serif;
+      font-weight: 900;
+      font-size: 24px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      user-select: none;
+      animation: slideInLeft 0.8s ease-out 0.2s both;
+    }
+
+    .logo .colored {
+      color: #35640d;
+      font-weight: 900;
+    }
+
+    .badge {
+      background-color: #2a6e0e;
+      color: white;
+      font-size: 13px;
+      padding: 6px 14px;
+      border-radius: 6px;
+      margin-left: 10px;
+      user-select: none;
+    }
+
+    nav {
+      display: flex;
+      gap: 28px;
+      font-weight: 500;
+      align-items: center;
+      animation: slideInRight 0.8s ease-out 0.2s both;
+    }
+
+    nav a {
+      color: #191919;
+      padding: 6px 0;
+      transition: color 0.2s ease;
+    }
+
+    nav a:hover {
+      color: #538619;
+    }
+
+    .profile-icon {
+      border: 2px solid #000;
+      border-radius: 50%;
+      width: 32px;
+      height: 32px;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-sizing: border-box;
+    }
+
+    .profile-icon svg {
+      width: 18px;
+      height: 18px;
+      stroke: #000;
+      stroke-width: 1.7;
+    }
+
+    
+     /* Hero */
+    .hero {
+      background-color: #cff4d6;
+      display: flex;
+      padding: 20px 40px;
+      gap: 24px;
+      align-items: center;
+      justify-content: center; /* centered horizontally */
+      flex-wrap: nowrap;
+      position: relative;
+      animation: slideInUp 0.8s ease-out 0.4s both;
+    }
+
+    .hero-text {
+      flex: 0 1 280px;
+      font-size: 16px;
+      font-style: italic;
+      font-weight: 700;
+      line-height: 1.2;
+      color: #000;
+      min-width: 280px;
+      text-align: left;
+      user-select: none;
+      animation: slideInLeft 0.8s ease-out 0.6s both;
+    }
+
+    .hero-text span {
+      font-weight: 900;
+    }
+
+    .hero-text p {
+      margin-top: 6px;
+      margin-bottom: 0;
+    }
+
+    .search-box {
+      flex: 0 1 320px;
+      max-width: 320px;
+      position: relative;
+      margin: 0 20px;
+      animation: zoomIn 0.8s ease-out 0.8s both;
+    }
+
+    .search-box input {
+      width: 100%;
+      border-radius: 24px;
+      border: none;
+      padding: 10px 14px;
+      font-size: 14px;
+      outline: none;
+      box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
+      background: white;
+    }
+
+    /* Search icon inside input */
+    .search-box svg {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      fill: none;
+      stroke: #767676;
+      stroke-width: 1.5;
+      width: 18px;
+      height: 18px;
+      cursor: pointer;
+    }
+.hero {
+  position: relative; /* This makes it the reference for absolute positioning */
+  background-color: #cff4d6;
+  padding: 20px 40px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.hero-banner {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 300px; /* Adjust width as needed */
+  height: auto;
+  z-index: 50;
+  border-radius: 0 0 0 12px;
+  overflow: hidden;
+  animation: slideInRight 0.8s ease-out 0.6s both;
+}
+
+.hero-banner img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  user-select: none;
+  display: block;
+}
+
+    /* Info Section */
+    .info-section {
+      background: #cff4d6;
+      padding: 20px 40px;
+    }
+
+    .info-cards {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      font-weight: 700;
+      font-size: 14px;
+      color: #2f630e;
+    }
+
+    .info-card {
+      background: #ffff;
+      padding: 12px 18px;
+      border-radius: 16px;
+      box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
+    }
+
+    /* Content */
+    .content {
+      display: flex;
+      gap: 40px;
+      padding: 30px 40px;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+
+    .left {
+      flex: 1 1 460px;
+      min-width: 320px;
+    }
+
+    .categories {
+      font-weight: 800;
+      font-size: 20px;
+      margin-bottom: 16px;
+    }
+
+    .category-list {
+      font-weight: 750;
+      font-size: 15px;
+      display: flex;
+      gap: 90px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+
+    .category {
+      
+  width: 110px;         /* Wider box */
+  height: 140px;        /* Taller box */
+  padding: 6px;        /* Inner spacing */
+  border-radius: 16px;  /* Rounded corners */
+  background-color: #f0f8e0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  animation: slideInUp 0.6s ease-out calc(1s + var(--cat-delay, 0s)) both;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.category:hover {
+  transform: translateY(-5px) scale(1.05);
+}
+
+.category:nth-child(1) { --cat-delay: 0.1s; }
+.category:nth-child(2) { --cat-delay: 0.2s; }
+.category:nth-child(3) { --cat-delay: 0.3s; }
+.category:nth-child(4) { --cat-delay: 0.4s; }
+
+    .category img {
+  width: 80px;
+  height: 80px;
+  border-radius: 12px;       /* Rounded image corners */
+  object-fit: contain;
+  background-color: white;
+  padding: 6px;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
+}
+    .deals {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .deal-card {
+      background: #fff1f2;
+      border-radius: 10px;
+      box-shadow: 2px 2px 8px rgb(0 0 0 / 0.08);
+      width: 220px;
+      padding: 20px;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      animation: slideInLeft 0.6s ease-out calc(1.2s + var(--deal-delay, 0s)) both;
+    }
+
+    .deal-card:nth-child(1) { --deal-delay: 0.1s; }
+    .deal-card:nth-child(2) { --deal-delay: 0.2s; }
+
+    .deal-card:hover {
+      box-shadow: 3px 6px 14px rgb(0 0 0 / 0.2);
+    }
+
+    .deal-card img {
+      width: 100%;
+      height: 110px;
+      object-fit: contain;
+      border-radius: 8px;
+      margin-bottom: 8px;
+      background-color: white;
+      user-select: none;
+    }
+
+    .deal-card h4 {
+      margin: 6px 0 4px 0;
+      font-weight: 700;
+      font-size: 15px;
+      color: #222;
+    }
+
+    .deal-card p {
+      font-size: 13px;
+      color: #444;
+      margin: 2px 0;
+    }
+
+    .offer {
+      font-weight: 800;
+      font-size: 14px;
+      color: #336600;
+      margin-top: 6px;
+    }
+.button-group {
+  display: flex;
+  gap: 30px;
+  margin-top: 10px;
+}
+
+.buy-btn,
+.cart-btn {
+  background-color: #2a6e0e;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.buy-btn:hover,
+.cart-btn:hover {
+  background-color: #1e4d08;
+}
+
+ .right {
+      flex: 1 1 280px;
+      min-width: 280px;
+    }
+
+    .how-it-works {
+      font-weight: 800;
+      font-size: 20px;
+      margin-bottom: 0px;
+      color: #222;
+    }
+
+    .how-step {
+      display: flex;
+      align-items: center;
+      gap: 50px;
+      margin-bottom: 28px;
+      animation: slideInRight 0.6s ease-out calc(1.4s + var(--step-delay, 0s)) both;
+    }
+
+    .how-step:nth-child(2) { --step-delay: 0.1s; }
+    .how-step:nth-child(3) { --step-delay: 0.2s; }
+    .how-step:nth-child(4) { --step-delay: 0.3s; }
+
+    .how-step img {
+      width: 100px;
+      height: 100px;
+      object-fit: contain;
+      border-radius: 6px;
+      background-color: #ffff;
+      padding: 8px;
+    }
+
+    .how-step p {
+      font-weight: 700;
+      font-size: 20px;
+      color: #222;
+      line-height: 5.4;
+    }
+
+    @media (max-width: 768px) {
+      .content {
+        flex-direction: column;
+      }
+      .left,
+      .right {
+        width: 100%;
+      }
+      .info-cards {
+        flex-direction: column;
+        align-items: center;
+      }
+      .hero {
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+      .hero-banner {
+        margin-top: 20px;
+        max-width: 90%;
+        height: auto;
+      }
+      .contact-icon {
+        top: 10px;
+        right: 40px;
+      }
+    }
+    .profile-slide {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 260px;
+  height: 100%;
+  background: #ffffff;
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  padding: 20px;
+  transition: transform 0.3s ease;
+  transform: translateX(100%);
+  border-radius: 12px 0 0 12px;
+}
+
+.profile-slide.visible {
+  transform: translateX(0);
+}
+
+.profile-slide.hidden {
+  transform: translateX(100%);
+}
+
+.slide-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.slide-header h3 {
+  font-size: 18px;
+  margin: 0;
+  font-weight: 800;
+  color: #2a6e0e;
+}
+
+.close-slide {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #333;
+}
+
+.slide-options {
+  list-style: none;
+  padding: 0;
+  margin-top: 20px;
+}
+
+.slide-options li {
+  padding: 12px 0;
+  font-size: 16px;
+  font-weight: 600;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+}
+
+.slide-options li:hover {
+  background-color: #f8fafc;
+}
+/* Overlay backdrop */
+#overlay {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0,0,0,0.4);
+  opacity: 0; visibility: hidden;
+  transition: opacity 0.3s;
+  z-index: 900;
+}
+
+/* Sidebar panel */
+#sideNav {
+  position: fixed; top: 0; right: 0; width: 0; height: 100%;
+  background: var(--light-green);
+  overflow-x: hidden;
+  transition: width 0.3s;
+  z-index: 1000;
+  padding-top: 60px;
+}
+
+/* Active states */
+#overlay.active { opacity: 1; visibility: visible; }
+#sideNav.active  { width: 260px; }
+
+/* Close button */
+#sideNav .close-btn {
+  position: absolute; top: 12px; right: 16px;
+  font-size: 24px; cursor: pointer;
+}
+
+/* Sidebar header */
+.side-header {
+  text-align: center; margin-bottom: 24px;
+}
+.side-header h3 { margin-bottom: 4px; font-size: 20px; }
+.side-header span { font-size: 14px; color: #444; }
+
+/* Sidebar menu */
+.side-menu a {
+  display: flex; align-items: center;
+  padding: 12px 20px; text-decoration: none; color: #000;
+}
+.side-menu a i { margin-right: 12px; }
+.side-menu a:hover { background: #d8f3dc; }
+.side-menu a.logout {
+  margin-top: 16px; font-weight: bold;
+}
+.profile-slide {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 260px;
+  height: 100%;
+  background: #ffffff;
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  padding: 20px;
+  transition: transform 0.3s ease;
+  transform: translateX(100%);
+  border-radius: 12px 0 0 12px;
+}
+
+.profile-slide.visible {
+  transform: translateX(0);
+}
+
+.profile-slide.hidden {
+  transform: translateX(100%);
+}
+
+.slide-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.slide-header h3 {
+  font-size: 18px;
+  margin: 0;
+  font-weight: 800;
+  color: #2a6e0e;
+}
+
+.close-slide {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #333;
+}
+
+.slide-options {
+  list-style: none;
+  padding: 0;
+  margin-top: 20px;
+}
+
+.slide-options li {
+  padding: 12px 0;
+  font-size: 16px;
+  font-weight: 600;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+}
+
+.slide-options li:hover {
+  background-color: #f8fafc;
+}
+
+.quantity-selector {
+  display: flex;
+  align-items: center;
+  margin: 8px 0;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.quantity-selector label {
+  margin-right: 8px;
+  color: #2f630e;
+}
+
+.quantity-selector input {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 4px;
+  text-align: center;
+}
+
+  </style>
+</head>
+<body>
+   <i
+    class="fa fa-user-circle"
+    style="position:absolute; top:20px; right:20px; font-size:24px; cursor:pointer;"
+    onclick="openSidebar()"
+    aria-label="Open profile menu"
+  ></i>
+
+  <!-- Header -->
+  <header>
+    <div class="logo">
+      <img src="nearexpirylogo.png" alt="NearXpiry Logo" width="50" height="50" />
+      <span class="colored">NearXpiry</span>
+      <span class="badge">Customer</span>
+    </div>
+    <nav>
+      <a href="customer-homepage.html">Home</a>
+      <a href="aboutus.html">About</a>
+      <a href="contactus.html">Contact</a>
+      <a href="terms.html">Terms & Privacy</a>
+      <div class="contact-icon" title="Contact">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+          <path d="M21 10c0 6-9 13-9 13S3 16 3 10a9 9 0 1 1 18 0z"></path>
+          <circle cx="12" cy="10" r="3"></circle>
+        </svg>
+      </div>
+      <div class="profile-icon" title="Profile">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="12" cy="7" r="4"></circle>
+          <path d="M5 21a8 8 0 0114 0"></path>
+        </svg>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-text">
+      <span>Save More, Waste Less</span>
+      <p>- Shop Near Expiry Deals</p>
+    </div>
+
+    <div class="search-box">
+      <input type="text" placeholder="Search for products" aria-label="Search for products" />
+      <svg viewBox="0 0 24 24" fill="none" role="img" aria-label="search icon" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="11" cy="11" r="7" stroke="#767676" stroke-width="1.5"></circle>
+        <line x1="16" y1="16" x2="21" y2="21" stroke="#767676" stroke-width="1.5" stroke-linecap="round"></line>
+      </svg>
+    </div>
+
+    <div class="hero-banner">
+      <img src="fruits.png" alt="Green Background Banner" />
+    </div>
+    
+  </section>
+
+  <!-- Info Section -->
+  <section class="info-section">
+    <div class="info-cards">
+      <div class="info-card">📑 Save up to 70% on near-expiry items</div>
+      <div class="info-card">♻ Reduce food waste & support sustainability</div>
+      <div class="info-card">🤝 Donate essentials to NGOs before expiry</div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <main class="content">
+    <section class="left" aria-label="Categories and nearby deals">
+      <div class="categories">Categories</div>
+      <div class="category-list">
+       <div class="category" onclick="window.location.href='snacks.html'">
+  <img src="snacks.jpg" alt="Snacks" />
+  Food & Snacks
+</div>
+         <div class="category" onclick="window.location.href='beverages.html'">
+  <img src="beverages.jpg" alt="Beverages" />
+  Beverages
+</div>
+         <div class="category" onclick="window.location.href='personalcare.html'">
+  <img src="personalcare.jpg" alt="personalcare" />
+ Personal Care & Household
+</div>
+         <div class="category" onclick="window.location.href='others.html'">
+  <img src="others.jpg" alt="Others" />
+  Others
+</div>
+      </div>
+
+      <div class="categories">NearBy Deals</div>
+      <div class="deals">
+        <div class="deal-card" data-name="good day biscuit">
+          <img src="goodday.jpg" alt="Good Day Biscuit" />
+          <h4>Good Day Biscuit</h4>
+          <p>Expires in 60 days</p>
+          <p>Only 50 left</p>
+          <p class="offer">60% OFF</p>
+          <div class="quantity-selector">
+            <label>Qty:</label>
+            <input type="number" id="qty-good-day" min="1" max="50" value="1" style="width: 60px; margin: 0 8px;">
+          </div>
+          <div class="button-group">
+          <button class="buy-btn" onclick="window.location.href='product-details.html?product=good-day-biscuit'">Buy Now</button>
+          <button class="cart-btn" onclick="addToCartWithQty('Good Day Biscuit', 'goodday.jpg', 60, 60, 'qty-good-day')">Add to Cart</button>
+          </div>
+</div>
+        <div class="deal-card" data-name="aachi idly chilli powder">
+          <img src="aachi_idli_powder.jpg" alt="Aachi Chilli Powder" />
+          <h4>Aachi Chilli Powder</h4>
+          <p>Expires in 80 days</p>
+          <p>Only 30 left</p>
+          <p class="offer">25% OFF</p>
+          <div class="quantity-selector">
+            <label>Qty:</label>
+            <input type="number" id="qty-aachi" min="1" max="30" value="1" style="width: 60px; margin: 0 8px;">
+          </div>
+          <div class="button-group">
+          <button class="buy-btn" onclick="window.location.href='product-details.html?product=aachi-chilli-powder'">Buy Now</button>
+           <button class="cart-btn" onclick="addToCartWithQty('Aachi idly Chilli Powder', 'aachi_idli_powder.jpg', 80, 25, 'qty-aachi')">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <aside class="right" aria-label="How it works instructions">
+      <div class="how-it-works">How It Works</div>
+      <div class="how-step">
+        <img src="browse.jpg" alt="Browse" />
+        <p>Browse near-expiry products</p>
+      </div>
+      <div class="how-step">
+        <img src="sales.jpg" alt="Discount" />
+        <p>Buy at a discount OR donate</p>
+      </div>
+      <div class="how-step">
+        <img src="handshake.jpg" alt="Save" />
+        <p>Enjoy savings & help the planet</p>
+      </div>
+
+    </aside>
+  </main>
+   <footer><center>
+    &copy; 2025 NearXpiry. Made with 💚 in India.
+  </center>
+  </footer>
+<div id="profile-slide" class="profile-slide hidden" aria-label="Profile menu">
+  <div class="slide-header">
+    <h3>Welcome, User!</h3>
+    <button onclick="toggleProfileSlide()" class="close-slide">×</button>
+  </div>
+  <ul class="slide-options">
+    <li onclick="window.location.href='profile.html'">👤 Profile</li>
+    <li onclick="window.location.href='settings.html'">⚙ Settings</li>
+    <li onclick="window.location.href='cart.html'">🛒 Cart (<span id="cart-count">0</span>)</li>
+   <li onclick="showLogoutModal()">🚪 Logout</li>
+  </ul>
+</div>
+
+<!-- ⚠ Logout Confirmation Modal -->
+<div id="logoutModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); z-index: 999;">
+  <div style="background-color: white; padding: 30px; border-radius: 10px; width: 300px; margin: 15% auto; text-align: center;">
+    <p style="font-size: 18px; margin-bottom: 20px;">Are you sure you want to logout?</p>
+    <button onclick="confirmLogout()" style="background-color: #c62828; color: white; padding: 10px 20px; border: none; border-radius: 5px; margin-right: 10px;">Logout</button>
+    <button onclick="closeLogoutModal()" style="background-color: #ddd; color: #333; padding: 10px 20px; border: none; border-radius: 5px;">Cancel</button>
+  </div>
+</div>
+</body>
+</html>
+<script>
+  const searchInput = document.querySelector('.search-box input');
+  const dealsContainer = document.querySelector('.deals');
+
+  searchInput.addEventListener('input', async () => {
+    const query = searchInput.value.trim();
+
+    // If query is empty, you might want to show default deals or clear the list
+    if (!query) {
+      dealsContainer.innerHTML = ''; 
+      return;
+    }
+
+    try {
+      // ← FIXED: backticks around the URL
+      const response = await fetch(
+        `/api/search?q=${encodeURIComponent(query)}`
+      );
+      const results = await response.json();
+
+      // Clear existing deals
+      dealsContainer.innerHTML = '';
+
+      // Render each matching item
+      results.forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'deal-card';
+       card.innerHTML = `
+         <img src="${item.image}" alt="${item.name}" />
+         <h4>${item.name}</h4>
+         <p>Expires in ${item.expiryDays} days</p>
+        <p class="offer">${item.discount}% OFF</p>
+        <p>Only ${item.quantity || 0} left</p>
+        <div class="quantity-selector">
+          <label>Qty:</label>
+          <input type="number" id="qty-${item.name.replace(/\s+/g, '-').toLowerCase()}" min="1" max="${item.quantity || 1}" value="1" style="width: 60px; margin: 0 8px;">
+        </div>
+        <div class="button-group">
+        <button class="buy-btn" onclick="window.location.href='product-details.html?product=${encodeURIComponent(item.name)}'">Buy Now</button>
+        <button class="cart-btn" onclick="addToCartWithQty('${item.name}', '${item.image}', ${item.expiryDays}, ${item.discount}, 'qty-${item.name.replace(/\s+/g, '-').toLowerCase()}')">Add to Cart</button>
+        </div>
+       `;
+        dealsContainer.appendChild(card);
+      });
+    } catch (err) {
+      console.error('Search failed:', err);
+      dealsContainer.innerHTML = '<p>Error loading search results.</p>';
+    }
+  });
+  
+  function openSidebar() {
+    document.getElementById('sideNav').classList.add('active');
+    document.getElementById('overlay').classList.add('active');
+  }
+
+  function closeSidebar() {
+    document.getElementById('sideNav').classList.remove('active');
+    document.getElementById('overlay').classList.remove('active');
+  }
+
+  function goToPage(pageId) {
+    document.querySelectorAll('.page').forEach(p => p.style.display = 'none');
+    document.getElementById(pageId).style.display = 'block';
+    closeSidebar();
+  }
+
+  function logoutUser() {
+    closeSidebar();
+    alert('Logged out successfully!');
+    window.location.href = 'login.html';
+  }
+function toggleProfileSlide() {
+  const slide = document.getElementById('profile-slide');
+  slide.classList.toggle('visible');
+  slide.classList.toggle('hidden');
+}
+
+document.querySelector('.profile-icon').addEventListener('click', toggleProfileSlide);
+
+  function showLogoutModal() {
+    document.getElementById("logoutModal").style.display = "block";
+  }
+
+  function closeLogoutModal() {
+    document.getElementById("logoutModal").style.display = "none";
+  }
+
+  function confirmLogout() {
+    // Optional: clear sessionStorage/localStorage here
+    window.location.href = "login.html"; // Replace with your actual login page
+  }
+  function addToCart(name, image, expiryDays, discount) {
+  const cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+  // Check if already in cart
+  const exists = cart.find(item => item.name === name);
+  if (!exists) {
+    cart.push({ name, image, expiryDays, discount, quantity: 1 });
+    localStorage.setItem('cart', JSON.stringify(cart));
+    alert(`${name} added to cart!`);
+  } else {
+    alert(`${name} is already in your cart.`);
+  }
+}
+
+function addToCartWithQty(name, image, expiryDays, discount, qtyInputId) {
+  const qtyInput = document.getElementById(qtyInputId);
+  const quantity = parseInt(qtyInput.value) || 1;
+  
+  const cart = JSON.parse(localStorage.getItem('cart')) || [];
+  const existingIndex = cart.findIndex(item => item.name === name);
+  
+  if (existingIndex >= 0) {
+    cart[existingIndex].quantity += quantity;
+  } else {
+    cart.push({ name, image, expiryDays, discount, quantity });
+  }
+  
+  localStorage.setItem('cart', JSON.stringify(cart));
+  updateCartCount();
+  alert(`${quantity} x ${name} added to cart!`);
+}
+
+function updateCartCount() {
+  const cart = JSON.parse(localStorage.getItem('cart')) || [];
+  const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+  const cartCountElement = document.getElementById('cart-count');
+  if (cartCountElement) {
+    cartCountElement.textContent = totalItems;
+  }
+}
+
+// Update cart count and load products on page load
+document.addEventListener('DOMContentLoaded', () => {
+  updateCartCount();
+  loadNearbyDeals();
+});
+
+// Load nearby deals with real-time stock
+async function loadNearbyDeals() {
+  try {
+    const response = await fetch('/api/products');
+    const products = await response.json();
+    
+    const dealsContainer = document.querySelector('.deals');
+    dealsContainer.innerHTML = '';
+    
+    // Show first 2 products as nearby deals
+    products.slice(0, 2).forEach(product => {
+      const isOutOfStock = product.quantity <= 0;
+      const card = document.createElement('div');
+      card.className = 'deal-card';
+      card.innerHTML = `
+        <img src="${product.image}" alt="${product.name}" />
+        <h4>${product.name}</h4>
+        <p>Expires in ${product.expiryDays} days</p>
+        <p>${isOutOfStock ? '<span style="color: red; font-weight: bold;">OUT OF STOCK</span>' : `Only ${product.quantity} left`}</p>
+        <p class="offer">${product.discount}% OFF</p>
+        ${!isOutOfStock ? `
+        <div class="quantity-selector">
+          <label>Qty:</label>
+          <input type="number" id="qty-${product.name.replace(/\s+/g, '-').toLowerCase()}" min="1" max="${product.quantity}" value="1" style="width: 60px; margin: 0 8px;">
+        </div>
+        <div class="button-group">
+          <button class="buy-btn" onclick="window.location.href='product-details.html?product=${encodeURIComponent(product.name)}'">Buy Now</button>
+          <button class="cart-btn" onclick="addToCartWithQty('${product.name}', '${product.image}', ${product.expiryDays}, ${product.discount}, 'qty-${product.name.replace(/\s+/g, '-').toLowerCase()}')">Add to Cart</button>
+        </div>` : '<p style="color: red; font-weight: bold;">Currently Unavailable</p>'}
+      `;
+      dealsContainer.appendChild(card);
+    });
+  } catch (err) {
+    console.error('Failed to load nearby deals:', err);
+  }
+}
+
+</script>

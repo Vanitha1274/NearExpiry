@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Available Donations</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #fff;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      color: #333;
+      animation: fadeIn 0.8s ease-in;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(30px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .container {
+      max-width: 600px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 2.5em;
+      margin-bottom: 10px;
+      line-height: 1.2;
+      animation: slideUp 0.6s ease-out 0.2s both;
+    }
+
+    
+    .instruction {
+      font-size: 1em;
+      margin-bottom: 20px;
+    }
+
+    .donation-list {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .donation-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 15px;
+      background-color: #f9f9f9;
+      text-align: left;
+      animation: slideUp 0.5s ease-out calc(0.4s + var(--item-delay, 0s)) both;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .donation-item:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    }
+
+    .donation-details {
+      flex-grow: 1;
+    }
+
+    .donation-details h3 {
+      margin: 0 0 8px;
+      font-size: 1.1em;
+      color: #2e7d32;
+    }
+
+    .donation-details p {
+      margin: 4px 0;
+      font-size: 0.95em;
+    }
+
+    .claim-btn {
+      background-color: #2e7d32;
+      color: white;
+      border: none;
+      padding: 8px 14px;
+      font-size: 0.9em;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .claim-btn:hover {
+      background-color: #256628;
+      transform: scale(1.05);
+      box-shadow: 0 4px 12px rgba(46, 125, 50, 0.3);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Available<br>Donations</h1>
+    <p class="instruction">Please select from the list of verified donations listed below:</p>
+
+    <div id="loading" style="color: #2e7d32; margin: 20px 0;">Loading donations...</div>
+    <div id="donation-list" class="donation-list" style="display: none;"></div>
+    <div id="no-donations" style="display: none; color: #666; margin: 20px 0;">No donations available.</div>
+  </div>
+  <script>
+    async function loadDonations() {
+      try {
+        const response = await fetch('/api/donations');
+        const donations = await response.json();
+        
+        const loading = document.getElementById('loading');
+        const container = document.getElementById('donation-list');
+        const noDonations = document.getElementById('no-donations');
+        
+        loading.style.display = 'none';
+        
+        if (donations.length === 0) {
+          noDonations.style.display = 'block';
+          return;
+        }
+        
+        container.style.display = 'flex';
+        container.innerHTML = '';
+        
+        // Filter out already claimed donations
+        const claimedIds = JSON.parse(localStorage.getItem('claimedIds') || '[]');
+        const availableDonations = donations.filter(donation => !claimedIds.includes(donation._id));
+        
+        availableDonations.forEach((donation, index) => {
+          const item = document.createElement('div');
+          item.className = 'donation-item';
+          item.style.setProperty('--item-delay', `${index * 0.1}s`);
+          
+          item.innerHTML = `
+            <div class="donation-details">
+              <h3>${donation.productName}</h3>
+              <p>Expires in: ${donation.expiryDays} days</p>
+              <p>Quantity: ${donation.quantity}</p>
+              <p>From: ${donation.sellerName}</p>
+              <p>Location: ${donation.location}</p>
+              ${donation.sellerPhone ? `<p>Contact: ${donation.sellerPhone}</p>` : ''}
+            </div>
+            <button class="claim-btn" onclick="claimDonation('${donation._id}', '${donation.productName}')">
+              Claim
+            </button>
+          `;
+          container.appendChild(item);
+        });
+        
+      } catch (err) {
+        document.getElementById('loading').textContent = 'Error loading donations';
+      }
+    }
+    
+    async function claimDonation(donationId, productName) {
+      try {
+        // Store claimed donation in localStorage for pending status
+        const claimedDonations = JSON.parse(localStorage.getItem('claimedDonations') || '[]');
+        const newClaim = {
+          id: donationId,
+          productName: productName,
+          claimedDate: new Date().toLocaleDateString(),
+          status: 'pending'
+        };
+        claimedDonations.push(newClaim);
+        localStorage.setItem('claimedDonations', JSON.stringify(claimedDonations));
+        
+        // Store claimed donation IDs to filter from available list
+        const claimedIds = JSON.parse(localStorage.getItem('claimedIds') || '[]');
+        claimedIds.push(donationId);
+        localStorage.setItem('claimedIds', JSON.stringify(claimedIds));
+        
+        alert(`Successfully claimed ${productName}! Redirecting to claimed donations...`);
+        
+        // Redirect to claimed donations page
+        setTimeout(() => {
+          window.location.href = 'claimdonations.html';
+        }, 1500);
+        
+      } catch (err) {
+        alert('Error claiming donation');
+      }
+    }
+    
+    loadDonations();
+  </script>
+</body>
+</html>

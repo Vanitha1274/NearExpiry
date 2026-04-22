@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Others Deals</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f9fdf8;
+      color: #222;
+      animation: fadeIn 0.8s ease-in;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes slideInDown {
+      from { transform: translateY(-50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    @keyframes slideInUp {
+      from { transform: translateY(50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    header {
+      padding: 20px 40px;
+      background-color: #ffffff;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      animation: slideInDown 0.6s ease-out;
+    }
+
+    header h2 {
+      font-size: 24px;
+      font-weight: 800;
+      color: #35640d;
+    }
+
+    header a {
+      font-size: 14px;
+      color: #538619;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .category-section {
+      padding: 30px 40px;
+      animation: slideInUp 0.8s ease-out 0.2s both;
+    }
+
+    .category-title {
+      font-size: 22px;
+      font-weight: 800;
+      margin-bottom: 20px;
+      color: #2f630e;
+    }
+
+    .deals {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+
+    .deal-card {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+      width: 220px;
+      padding: 16px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      animation: slideInUp 0.5s ease-out calc(0.4s + var(--card-delay, 0s)) both;
+    }
+
+    .deal-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+    }
+
+    .deal-card img {
+      width: 100%;
+      height: 120px;
+      object-fit: contain;
+      border-radius: 8px;
+      background-color: #fff;
+      margin-bottom: 10px;
+    }
+
+    .deal-card h4 {
+      font-size: 16px;
+      font-weight: 700;
+      margin: 6px 0;
+    }
+
+    .deal-card p {
+      font-size: 13px;
+      margin: 2px 0;
+      color: #444;
+    }
+
+    .offer {
+      font-weight: 800;
+      color: #336600;
+      margin-top: 6px;
+    }
+
+    .button-group {
+      display: flex;
+      gap: 40px;
+      margin-top: 10px;
+    }
+
+    .buy-btn, .cart-btn {
+      background-color: #2a6e0e;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+
+    .buy-btn:hover, .cart-btn:hover {
+      background-color: #1e4d08;
+    }
+
+    @media (max-width: 768px) {
+      .deals {
+        justify-content: center;
+      }
+
+      .deal-card {
+        width: 90%;
+        max-width: 300px;
+      }
+
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+      }
+
+      .button-group {
+        flex-direction: column;
+        gap: 6px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h2>Others</h2>
+    <a href="customer-homepage.html">← Back to Home</a>
+  </header>
+
+  <main>
+    <section class="category-section">
+      <h2 class="category-title">Other Deals</h2>
+      <div class="deals" id="snackDeals"></div>
+    </section>
+  </main>
+
+  <script>
+    const container = document.getElementById('snackDeals');
+
+    async function loadothers() {
+      try {
+        const res = await fetch('/api/category?q=others');
+        const items = await res.json();
+
+        container.innerHTML = '';
+        if (items.length === 0) {
+          container.innerHTML = '<p>No deals available in this category.</p>';
+          return;
+        }
+
+        items.forEach((item, index) => {
+          const isOutOfStock = item.quantity <= 0;
+          const card = document.createElement('div');
+          card.className = 'deal-card';
+          card.style.setProperty('--card-delay', `${index * 0.1}s`);
+          card.innerHTML = `
+            <img src="${item.image}" alt="${item.name}" />
+            <h4>${item.name}</h4>
+            <p>Expires in ${item.expiryDays} days</p>
+            <p class="offer">${item.discount}% OFF</p>
+            <p>${isOutOfStock ? '<span style="color: red; font-weight: bold;">OUT OF STOCK</span>' : `Only ${item.quantity} left`}</p>
+            ${!isOutOfStock ? `
+            <div class="quantity-selector">
+              <label>Qty:</label>
+              <input type="number" id="qty-${item.name.replace(/\s+/g, '-').toLowerCase()}" min="1" max="${item.quantity}" value="1" style="width: 60px; margin: 0 8px; border: 1px solid #ddd; border-radius: 4px; padding: 4px; text-align: center;">
+            </div>
+            <div class="button-group">
+              <button class="buy-btn" onclick="window.location.href='product-details.html?product=' + encodeURIComponent('${item.name}')">Buy Now</button>
+              <button class="cart-btn" onclick="addToCartWithQty('${item.name}', '${item.image}', ${item.expiryDays}, ${item.discount}, 'qty-${item.name.replace(/\s+/g, '-').toLowerCase()}')">Add to Cart</button>
+            </div>` : '<p style="color: red; font-weight: bold;">Currently Unavailable</p>'}
+          `;
+          container.appendChild(card);
+        });
+      } catch (err) {
+        container.innerHTML = '<p>Error loading products.</p>';
+        console.error(err);
+      }
+    }
+
+    function addToCart(name, image, expiryDays, discount) {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const exists = cart.find(item => item.name === name);
+
+      if (!exists) {
+        cart.push({ name, image, expiryDays, discount });
+        localStorage.setItem('cart', JSON.stringify(cart));
+        alert(`${name} added to cart!`);
+      } else {
+        alert(`${name} is already in your cart.`);
+      }
+    }
+
+    function addToCartWithQty(name, image, expiryDays, discount, qtyInputId) {
+      const qtyInput = document.getElementById(qtyInputId);
+      const quantity = parseInt(qtyInput.value) || 1;
+      
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const existingIndex = cart.findIndex(item => item.name === name);
+      
+      if (existingIndex >= 0) {
+        cart[existingIndex].quantity += quantity;
+      } else {
+        cart.push({ name, image, expiryDays, discount, quantity });
+      }
+      
+      localStorage.setItem('cart', JSON.stringify(cart));
+      alert(`${quantity} x ${name} added to cart!`);
+    }
+
+    loadothers();
+  </script>
+</body>
+</html>

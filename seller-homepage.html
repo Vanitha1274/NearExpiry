@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>NearXpirY Seller Page</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: #f9fdf9;
+    animation: fadeIn 0.8s ease-in;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes slideUp {
+    from { transform: translateY(30px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+
+  @keyframes slideInLeft {
+    from { transform: translateX(-50px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+  }
+
+  @keyframes slideInRight {
+    from { transform: translateX(50px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+  }
+
+  /* Navbar */
+  .navbar {
+    display: flex;
+    align-items: center;
+    background: white;
+    padding: 10px 40px;
+    border-bottom: 1px solid #ddd;
+    animation: slideUp 0.6s ease-out;
+  }
+
+  .logo {
+    font-weight: bold;
+    font-size: 22px;
+    color: #2a422d;
+  }
+
+  .menu {
+    display: flex;
+    margin-left: auto;
+    gap: 50px;
+    align-items: center;
+  }
+
+  .menu a {
+    text-decoration: none;
+    color: black;
+    font-size: 16px;
+    padding: 10px 15px;
+  }
+
+  .seller-btn {
+    background: #2a7a41;
+    color: white;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  .profile {
+    font-size: 20px;
+    margin-left: 25px;
+    cursor: pointer;
+  }
+
+  /* Hero section – compact version */
+.hero {
+  position: relative;
+  background-color: #cff4d6;
+  padding: 12px 30px; /* reduced from 20px 40px */
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  animation: slideUp 0.8s ease-out 0.2s both;
+}
+
+.hero-text {
+  flex: 1;
+  padding-right: 45px; /* slightly reduced */
+  text-align: center;
+  animation: slideInLeft 0.8s ease-out 0.4s both;
+}
+
+.hero-text h2 {
+  margin: 0 0 6px;
+  font-size: 30px; /* reduced from 28px */
+  color: #333;
+}
+
+.hero-text p {
+  font-style: italic;
+  font-size: 22px; /* reduced from 18px */
+  color: #555;
+  margin: 0;
+}
+
+.hero-image img {
+  width:  350px; /* reduced from default */
+  height: auto;
+  object-fit: contain;
+  border-radius: 8px;
+  animation: slideInRight 0.8s ease-out 0.4s both;
+  transition: transform 0.3s ease;
+}
+
+.hero-image img:hover {
+  transform: scale(1.05);
+}
+
+  /* Dashboard cards */
+  .dashboard {
+  display: flex;
+  flex-direction: row; /* stack cards vertically */
+  align-items: flex-start; /* align to left */
+  margin: 40px 0 40px 60px; /* push it away from left edge */
+  gap: 30px;
+  width: 60vw; /* 👈 expands dashboard width */
+  max-width: 800px;
+}
+
+
+ .card {
+  background: #e9faea;
+  border-radius: 10px;
+  padding: 25px 20px;
+  text-align: center; /* align text and buttons left */
+  width: 100%;
+  box-sizing: border-box;
+  animation: slideUp 0.6s ease-out calc(0.6s + var(--delay, 0s)) both;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.card:nth-child(1) { --delay: 0.1s; }
+.card:nth-child(2) { --delay: 0.2s; }
+.card:nth-child(3) { --delay: 0.3s; }
+
+
+  .card img {
+    width: 160px;
+    height: 140px;
+    object-fit: contain;
+    margin-bottom: 15px;
+  }
+
+  .card h3 {
+    font-size: 18px;
+    margin: 12px 0;
+  }
+
+  .btn {
+    display: inline-block;
+    background: #186a3b;
+    color: white;
+    text-decoration: none;
+    padding: 10px 22px;
+    border-radius: 6px;
+    font-size: 16px;
+    margin-top: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .btn:hover {
+    background: #0f4a26;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(24, 106, 59, 0.3);
+  }
+
+  /* Stats */
+ .stats {
+  position: absolute;
+  top: 400px; /* adjust based on your layout */
+  right: 250px;
+  display: flex;
+  flex-direction: column; /* stack up/down */
+  gap: 30px;
+}
+
+
+  .stat-box {
+    background: #e9faea;
+    padding: 20px 30px;
+    border-radius: 25px;
+    text-align: center;
+    min-width: 200px;
+    animation: slideInRight 0.6s ease-out calc(0.8s + var(--stat-delay, 0s)) both;
+    transition: transform 0.3s ease;
+  }
+
+  .stat-box:hover {
+    transform: scale(1.05);
+  }
+
+  .stat-box:nth-child(1) { --stat-delay: 0.1s; }
+  .stat-box:nth-child(2) { --stat-delay: 0.2s; }
+
+  .stat-box h3 {
+    font-size: 18px;
+    margin: 8px 0;
+  }
+
+  .stat-box p {
+    font-size: 22px;
+    margin: 5px 0;
+  }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    .hero {
+      flex-direction: column;
+      padding: 30px 20px;
+      max-width: 95vw;
+    }
+    .hero-text {
+      padding-right: 0;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    .hero-image {
+      max-width: 100%;
+    }
+  }.profile-icon {
+  font-size: 22px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  right: -250px;
+  width: 220px;
+  height: 100%;
+  background-color: #ffffff;
+  box-shadow: -2px 0 10px rgba(0,0,0,0.1);
+  padding: 30px 20px;
+  transition: right 0.3s ease;
+  z-index: 1000;
+}
+
+.sidebar.open {
+  right: 0;
+}
+
+.sidebar h3 {
+  margin-bottom: 20px;
+  color: #2a422d;
+}
+
+.sidebar a {
+  display: block;
+  margin: 15px 0;
+  text-decoration: none;
+  color: #186a3b;
+  font-weight: bold;
+}
+.profile-slide {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 260px;
+  height: 100%;
+  background: #ffffff;
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  padding: 20px;
+  transition: transform 0.3s ease;
+  transform: translateX(100%);
+  border-radius: 12px 0 0 12px;
+}
+
+.profile-slide.visible {
+  transform: translateX(0);
+}
+
+.profile-slide.hidden {
+  transform: translateX(100%);
+}
+
+.slide-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.slide-header h3 {
+  font-size: 18px;
+  margin: 0;
+  font-weight: 800;
+  color: #2a6e0e;
+}
+
+.close-slide {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #333;
+}
+
+.slide-options {
+  list-style: none;
+  padding: 0;
+  margin-top: 20px;
+}
+
+.slide-options li {
+  padding: 12px 0;
+  font-size: 16px;
+  font-weight: 600;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+}.profile-slide {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 260px;
+  height: 100%;
+  background: #ffffff;
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  padding: 20px;
+  transition: transform 0.3s ease;
+  transform: translateX(100%);
+  border-radius: 12px 0 0 12px;
+}
+
+.profile-slide.visible {
+  transform: translateX(0);
+}
+
+.profile-slide.hidden {
+  transform: translateX(100%);
+}
+
+.slide-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.slide-header h3 {
+  font-size: 18px;
+  margin: 0;
+  font-weight: 800;
+  color: #2a6e0e;
+}
+
+.close-slide {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #333;
+}
+
+.slide-options {
+  list-style: none;
+  padding: 0;
+  margin-top: 20px;
+}
+
+.slide-options li {
+  padding: 12px 0;
+  font-size: 16px;
+  font-weight: 600;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+}
+
+.slide-options li:hover {
+  background-color: #f8fafc;
+}
+.logo {
+      font-family: 'Georgia', serif;
+      font-weight: 900;
+      font-size: 24px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      user-select: none;
+    }
+
+    .logo .colored {
+      color: #35640d;
+      font-weight: 900;
+    }
+</style>
+</head>
+<body>
+
+  <div class="navbar">
+       <div class="logo">
+      <img src="nearexpirylogo.png" alt="NearXpiry Logo" width="50" height="50" />
+      <span class="colored">NearXpiry</span>
+    
+    </div>
+    <div class="menu">
+      <button class="seller-btn">seller</button>
+      <a href="seller-homepage.html">Home</a>
+      <a href="aboutus.html">About</a>
+      <a href="contactus.html">Contact</a>
+      <a href="terms.html">Terms & Privacy</a>
+  <div class="profile-icon">👤</div>
+</div>
+
+  </div>
+
+  <div class="hero">
+    <div class="hero-text">
+      <h2>Save More, Waste Less</h2>
+      <p>-Sell Smart, Reduce Waste, Create impact-</p>
+    </div>
+    <div class="hero-image">
+      <img src="fruits.png" alt="hero side image" />
+    </div>
+  </div>
+
+  <div class="dashboard">
+    <div class="card">
+      <img src="uploadproducts.jpg" alt="basket" />
+      <h3>UPLOAD NEARXPIRY ITEM</h3>
+      <a href="add-product.html" class="btn">Upload Item</a>
+    </div>
+
+    <div class="card">
+      <img src="viewclaims.jpg" alt="customers" />
+      <h3>CUSTOMER CLAIMS</h3>
+      <a href="customer_claims.html" class="btn">View Claims</a>
+    </div>
+
+    <div class="card">
+      <img src="donatenow.png" alt="donate" />
+      <h3>DONATE PRODUCTS</h3>
+      <a href="create-donation.html" class="btn">Donate Now</a>
+    </div>
+  </div>
+
+  <div class="stats">
+    <div class="stat-box">
+      <h3>Published</h3>
+      <p>2</p>
+    </div>
+    <div class="stat-box">
+      <h3>Claimed</h3>
+      <p>5</p>
+    </div>
+  </div>
+ <div id="profile-slide" class="profile-slide hidden" aria-label="Profile menu">
+  <div class="slide-header">
+    <h3>Welcome, User!</h3>
+    <button onclick="toggleProfileSlide()" class="close-slide">×</button>
+  </div>
+  <ul class="slide-options">
+    <li onclick="window.location.href='pro1.html'">👤 Profile</li>
+    <li onclick="window.location.href='Settings.html'">⚙ Settings</li>
+   <li onclick="showLogoutModal()">🚪 Logout</li>
+  </ul>
+</div>
+
+<!-- ⚠ Logout Confirmation Modal -->
+<div id="logoutModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); z-index: 999;">
+  <div style="background-color: white; padding: 30px; border-radius: 10px; width: 300px; margin: 15% auto; text-align: center;">
+    <p style="font-size: 18px; margin-bottom: 20px;">Are you sure you want to logout?</p>
+    <button onclick="confirmLogout()" style="background-color: #c62828; color: white; padding: 10px 20px; border: none; border-radius: 5px; margin-right: 10px;">Logout</button>
+    <button onclick="closeLogoutModal()" style="background-color: #ddd; color: #333; padding: 10px 20px; border: none; border-radius: 5px;">Cancel</button>
+  </div>
+
+</body>
+</html>
+<script> 
+  function openSidebar() {
+    document.getElementById('sideNav').classList.add('active');
+    document.getElementById('overlay').classList.add('active');
+  }
+
+  function closeSidebar() {
+    document.getElementById('sideNav').classList.remove('active');
+    document.getElementById('overlay').classList.remove('active');
+  }
+
+  function goToPage(pageId) {
+    document.querySelectorAll('.page').forEach(p => p.style.display = 'none');
+    document.getElementById(pageId).style.display = 'block';
+    closeSidebar();
+  }
+
+  function logoutUser() {
+    closeSidebar();
+    alert('Logged out successfully!');
+    window.location.href = 'login.html';
+  }
+function toggleProfileSlide() {
+  const slide = document.getElementById('profile-slide');
+  slide.classList.toggle('visible');
+  slide.classList.toggle('hidden');
+}
+
+document.querySelector('.profile-icon').addEventListener('click', toggleProfileSlide);
+
+  function showLogoutModal() {
+    document.getElementById("logoutModal").style.display = "block";
+  }
+
+  function closeLogoutModal() {
+    document.getElementById("logoutModal").style.display = "none";
+  }
+
+  function confirmLogout() {
+    // Optional: clear sessionStorage/localStorage here
+    window.location.href = "login.html"; // Replace with your actual login page
+  }
+</script>

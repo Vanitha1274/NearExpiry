@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NearXpiry - Terms & Privacy</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background-color: #ffffff;
+      color: #1b3b2f;
+      animation: fadeIn 0.8s ease-in;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes slideInDown {
+      from { transform: translateY(-50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    @keyframes slideInLeft {
+      from { transform: translateX(-80px); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+
+    @keyframes slideInRight {
+      from { transform: translateX(80px); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+
+    @keyframes slideInUp {
+      from { transform: translateY(50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    header {
+      background-color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      animation: slideInDown 0.6s ease-out;
+    }
+
+    .logo-title {
+      display: flex;
+      align-items: center;
+      animation: slideInLeft 0.8s ease-out 0.2s both;
+    }
+
+    .logo-title img {
+      height: 50px;
+      margin-right: 0.6rem;
+    }
+
+    .logo-title h1 {
+      font-size: 1.5rem;
+      color: #2e7d32;
+      margin: 0;
+    }
+
+    nav {
+      display: flex;
+      gap: 3rem;
+      animation: slideInRight 0.8s ease-out 0.2s both;
+    }
+
+    nav a {
+      color: #2e7d32;
+      text-decoration: none;
+      font-weight: 600;
+      padding: 4px 8px;
+    }
+
+    nav a.active {
+      background-color: #2e7d32;
+      color: white;
+      border-radius: 4px;
+    }
+
+    .banner {
+      background-color: #dcedc8;
+      padding: 2rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      animation: slideInUp 0.8s ease-out 0.4s both;
+    }
+
+    .banner-text {
+      max-width: 500px;
+    }
+
+    .banner-text h2 {
+      font-size: 2rem;
+      color: #2e7d32;
+      margin-bottom: 0.5rem;
+    }
+
+    .banner-text p {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: black;
+    }
+
+    .info-boxes {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+      padding: 2rem;
+    }
+
+    .box {
+      background-color: #e8f5e9;
+      border: 1px solid #c8e6c9;
+      border-radius: 8px;
+      padding: 1.5rem;
+      width: 400px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      animation: slideInUp 0.6s ease-out calc(0.6s + var(--box-delay, 0s)) both;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .box:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+
+    .box:nth-child(1) { --box-delay: 0.1s; }
+    .box:nth-child(2) { --box-delay: 0.2s; }
+
+    .box h3 {
+      color: #2e7d32;
+      margin-bottom: 0.5rem;
+      font-size: 1.2rem;
+    }
+
+    .box p {
+      font-size: 0.95rem;
+      line-height: 1.5;
+      color: #1b3b2f;
+    }
+
+    footer {
+      background-color: #1b5e20;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 768px) {
+      .banner {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .info-boxes {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .box {
+        width: 90%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo-title">
+      <img src="nearexpirylogo.png" alt="NearXpiry Logo" />
+      <h1>NearXpiry</h1>
+    </div>
+    <nav>
+      <a href="customer-homepage.html">Home</a>
+      <a href="aboutus.html">About</a>
+      <a href="contactus.html">Contact</a>
+      <a href="terms.html" class="active">Terms & Privacy</a>
+    </nav>
+  </header>
+
+  <section class="banner">
+  <div class="banner-text">
+    <h1>Terms & Privacy</h1>
+    <h2>Save More, Waste Less - Shop Near Expiry Deals</h2>
+  </div>
+  <img src="terms.png" alt="Decorative Fruits" style="float: right; height: auto; width: 350px; margin-left: 1rem;">
+</section>
+
+  <section class="info-boxes">
+    <div class="box">
+      <h3>Terms & Conditions</h3>
+      <p>
+        The Near Expiry App is developed as part of a Full Stack Development (FSD) project and is intended only for educational purposes. Users agree to enter accurate product details as the app uses expiry dates to generate reminders. The app does not guarantee complete accuracy and developers are not responsible for any loss, errors, or misuse caused by expired products. Users are prohibited from misusing, copying, or commercially distributing the app without prior permission.
+      </p>
+    </div>
+    <div class="box">
+      <h3>Privacy Policy</h3>
+      <p>
+        The Near Expiry App respects user privacy and only collects the minimum information needed for functionality. This includes product names and expiry dates entered by users. The data is used solely within the app to manage and display product details and is not shared with third parties. Users can edit or delete their data at any time. Basic security measures are implemented, but complete protection cannot be guaranteed as this is a student project.
+      </p>
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2025 NearXpiry. Built for a greener tomorrow 🌱
+  </footer>
+</body>
+</html>

@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Create Donation</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #fff;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      color: #333;
+      animation: fadeIn 0.8s ease-in;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes slideInDown {
+      from { transform: translateY(-50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    @keyframes slideInUp {
+      from { transform: translateY(50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    @keyframes slideInLeft {
+      from { transform: translateX(-50px); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+
+    @keyframes slideInRight {
+      from { transform: translateX(50px); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+
+    @keyframes zoomIn {
+      from { transform: scale(0.9); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .container {
+      max-width: 500px;
+      margin: auto;
+      padding: 20px;
+      animation: zoomIn 0.8s ease-out 0.2s both;
+    }
+
+    h1 {
+      font-size: 2.5em;
+      margin-bottom: 10px;
+      color: #2e7d32;
+      animation: slideInDown 0.8s ease-out 0.4s both;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+      text-align: left;
+      animation: slideInUp 0.5s ease-out calc(0.6s + var(--field-delay, 0s)) both;
+    }
+
+    .form-group:nth-child(1) { --field-delay: 0.1s; }
+    .form-group:nth-child(2) { --field-delay: 0.15s; }
+    .form-group:nth-child(3) { --field-delay: 0.2s; }
+    .form-group:nth-child(4) { --field-delay: 0.25s; }
+    .form-group:nth-child(5) { --field-delay: 0.3s; }
+    .form-group:nth-child(6) { --field-delay: 0.35s; }
+    .form-group:nth-child(7) { --field-delay: 0.4s; }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+      color: #555;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 14px;
+      box-sizing: border-box;
+      transition: all 0.3s ease;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: #2e7d32;
+      box-shadow: 0 0 8px rgba(46, 125, 50, 0.2);
+      transform: scale(1.02);
+    }
+
+    textarea {
+      height: 80px;
+      resize: vertical;
+    }
+
+    .submit-btn {
+      background-color: #2e7d32;
+      color: white;
+      border: none;
+      padding: 12px 30px;
+      font-size: 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 10px;
+      animation: slideInRight 0.6s ease-out 1.4s both;
+      transition: all 0.3s ease;
+    }
+
+    .submit-btn:hover {
+      background-color: #256628;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(46, 125, 50, 0.3);
+    }
+
+    .back-btn {
+      background-color: #666;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      font-size: 14px;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-right: 10px;
+      animation: slideInLeft 0.6s ease-out 1.4s both;
+      transition: all 0.3s ease;
+    }
+
+    .back-btn:hover {
+      background-color: #555;
+      transform: translateX(-3px);
+    }
+
+    .message {
+      padding: 10px;
+      border-radius: 5px;
+      margin: 10px 0;
+      display: none;
+      animation: slideInDown 0.5s ease-out;
+    }
+
+    .success {
+      background-color: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+    }
+
+    .error {
+      background-color: #f8d7da;
+      color: #721c24;
+      border: 1px solid #f5c6cb;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Create Donation</h1>
+    <p>Help reduce food waste by donating products nearing expiry</p>
+
+    <div id="message" class="message"></div>
+
+    <form id="donationForm">
+      <div class="form-group">
+        <label for="productName">Product Name *</label>
+        <input type="text" id="productName" name="productName" required>
+      </div>
+
+      <div class="form-group">
+        <label for="quantity">Quantity *</label>
+        <div style="display: flex; gap: 10px;">
+          <input type="number" id="quantity" name="quantity" min="1" required style="flex: 2;">
+          <select id="quantityUnit" name="quantityUnit" style="flex: 1;">
+            <option value="pack">Pack</option>
+            <option value="kg">Kg</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="expiryTime">Time Until Expiry *</label>
+        <div style="display: flex; gap: 10px;">
+          <input type="number" id="expiryTime" name="expiryTime" min="1" required style="flex: 2;">
+          <select id="expiryUnit" name="expiryUnit" style="flex: 1;">
+            <option value="days">Days</option>
+            <option value="hours">Hours</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="category">Category</label>
+        <select id="category" name="category">
+          <option value="Snacks">Snacks</option>
+          <option value="Beverages">Beverages</option>
+          <option value="Personal Care">Personal Care</option>
+          <option value="Others">Others</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="sellerName">Your Name/Store Name *</label>
+        <input type="text" id="sellerName" name="sellerName" required>
+      </div>
+
+      <div class="form-group">
+        <label for="sellerPhone">Contact Number *</label>
+        <input type="tel" id="sellerPhone" name="sellerPhone" required>
+      </div>
+
+      <div class="form-group">
+        <label for="location">Pickup Location *</label>
+        <textarea id="location" name="location" placeholder="Enter your address or pickup instructions" required></textarea>
+      </div>
+
+      <button type="button" class="back-btn" onclick="history.back()">Back</button>
+      <button type="submit" class="submit-btn">Create Donation</button>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById('donationForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      
+      const formData = new FormData(e.target);
+      const data = Object.fromEntries(formData.entries());
+      
+      // Combine quantity with unit
+      data.quantity = `${data.quantity} ${data.quantityUnit}`;
+      delete data.quantityUnit;
+      
+      // Convert expiry to days and combine with unit
+      let expiryDays = parseInt(data.expiryTime);
+      if (data.expiryUnit === 'hours') {
+        expiryDays = Math.ceil(expiryDays / 24); // Convert hours to days
+      }
+      data.expiryDays = expiryDays;
+      data.expiryDisplay = `${data.expiryTime} ${data.expiryUnit}`;
+      delete data.expiryTime;
+      delete data.expiryUnit;
+      
+      const messageDiv = document.getElementById('message');
+      
+      try {
+        const response = await fetch('/api/add-donation', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+        
+        const result = await response.json();
+        
+        if (result.ok) {
+          messageDiv.className = 'message success';
+          messageDiv.textContent = 'Donation created successfully! Thank you for helping reduce food waste.';
+          messageDiv.style.display = 'block';
+          e.target.reset();
+        } else {
+          messageDiv.className = 'message error';
+          messageDiv.textContent = 'Error: ' + result.message;
+          messageDiv.style.display = 'block';
+        }
+      } catch (err) {
+        messageDiv.className = 'message error';
+        messageDiv.textContent = 'Failed to create donation. Please try again.';
+        messageDiv.style.display = 'block';
+      }
+    });
+  </script>
+</body>
+</html>

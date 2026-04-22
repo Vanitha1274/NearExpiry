@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>NearXpiry NGOs Dashboard</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #fff;
+            animation: fadeIn 0.8s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideInDown {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes slideInLeft {
+            from { transform: translateX(-80px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes slideInRight {
+            from { transform: translateX(80px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes slideInUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes zoomIn {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #fff;
+            padding: 8px 50px;
+            position: relative;
+            animation: slideInDown 0.6s ease-out;
+        }
+
+        .navbar .logo {
+            display: flex;
+            align-items: center;
+            font-size: 2em;
+            animation: slideInLeft 0.8s ease-out 0.2s both;
+        }
+
+        .navbar .logo img {
+            height: 40px;
+            margin-right: 8px;
+        }
+
+        .navbar .links {
+            display: flex;
+            align-items: center;
+            gap: 55px;
+            animation: slideInRight 0.8s ease-out 0.2s both;
+        }
+
+        .navbar .seller-btn {
+            background: #129f47;
+            color: #fff;
+            border: none;
+            padding: 6px 50px;
+            border-radius: 8px;
+            font-size: 1em;
+            cursor: pointer;
+        }
+
+        .navbar a {
+            text-decoration: none;
+            color: #222;
+            font-weight: bold;
+            font-size: 1em;
+        }
+
+        .profile-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            object-fit: cover;
+            background: #e1e1e1;
+        }
+
+        .fruits-img-topright {
+            position: absolute;
+            top: 55px;
+            right: 0px;
+            height: 190px;
+            z-index: 10;
+            animation: slideInRight 0.8s ease-out 0.4s both;
+            transition: transform 0.3s ease;
+        }
+
+        .fruits-img-topright:hover {
+            transform: scale(1.05);
+        }
+
+        .banner {
+            background: #cfffd3;
+            padding: 60px 60px;
+            min-height: 80px;
+            animation: slideInUp 0.8s ease-out 0.6s both;
+        }
+
+        .banner-content h1 {
+            color: #1e4225;
+            font-weight: bold;
+            font-size: 1.8em;
+            margin: 0;
+        }
+
+        .banner-content h2 {
+            font-style: italic;
+            color: #1e4225;
+            font-weight: normal;
+            font-size: 1.2em;
+            margin-top: 8px;
+        }
+
+        .main-section {
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-start;
+            gap: 40px;
+            padding: 60px 60px;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .main-cards {
+            display: flex;
+            gap: 80px;
+            justify-content: center;
+            flex: 1;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            background: #e2ffe3;
+            border-radius: 18px;
+            box-shadow: 0 1px 8px rgba(156, 207, 156, 0.15);
+            padding: 28px 26px 24px 26px;
+            text-align: center;
+            width: 300px;
+            height: 300px;
+            animation: zoomIn 0.6s ease-out calc(0.8s + var(--card-delay, 0s)) both;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 8px 25px rgba(156, 207, 156, 0.3);
+        }
+
+        .card:nth-child(1) { --card-delay: 0.1s; }
+        .card:nth-child(2) { --card-delay: 0.2s; }
+
+        .card img {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .card-btn {
+            display: inline-block;
+            margin-top: 18px;
+            background: #02893b;
+            color: #fff;
+            text-decoration: none;
+            padding: 8px 30px;
+            border-radius: 18px;
+            font-size: 1.08em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .card-btn:hover {
+            background: #016d2e;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(2, 137, 59, 0.3);
+        }
+
+        .side-col {
+            display: flex;
+            flex-direction: column;
+            gap: 28px;
+            min-width: 140px;
+        }
+
+        .side-widget {
+            background: #ccffe3;
+            border-radius: 18px;
+            padding: 45px 50px;
+            text-align: center;
+            min-width: 200px;
+            animation: slideInRight 0.6s ease-out calc(1.2s + var(--widget-delay, 0s)) both;
+            transition: transform 0.3s ease;
+        }
+
+        .side-widget:hover {
+            transform: scale(1.05);
+        }
+
+        .side-widget:nth-child(1) { --widget-delay: 0.1s; }
+        .side-widget:nth-child(2) { --widget-delay: 0.2s; }
+
+        .side-widget h4 {
+            margin: 0 0 8px 0;
+            font-weight: 600;
+            font-size: 1.3em;
+            color: #08732b;
+        }
+
+        .side-widget p {
+            margin: 0;
+            font-size: 2em;
+            color: #1b6429;
+            font-weight: bold;
+        }
+
+        @media (max-width: 1000px) {
+            .main-section {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .main-cards {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .side-col {
+                flex-direction: row;
+                justify-content: center;
+                margin-top: 30px;
+            }
+        }.profile-slide {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 260px;
+  height: 100%;
+  background: #ffffff;
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  padding: 20px;
+  transition: transform 0.3s ease;
+  transform: translateX(100%);
+  border-radius: 12px 0 0 12px;
+}
+
+.profile-slide.visible {
+  transform: translateX(0);
+}
+
+.profile-slide.hidden {
+  transform: translateX(100%);
+}
+
+.slide-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.slide-header h3 {
+  font-size: 18px;
+  margin: 0;
+  font-weight: 800;
+  color: #2a6e0e;
+}
+
+.close-slide {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #333;
+}
+
+.slide-options {
+  list-style: none;
+  padding: 0;
+  margin-top: 20px;
+}
+
+.slide-options li {
+  padding: 12px 0;
+  font-size: 16px;
+  font-weight: 600;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+}
+
+.slide-options li:hover {
+  background-color: #f8fafc;
+}
+
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="logo">
+            <img src="nearexpirylogo.png" alt="NearXpiry Logo">
+            NearXpiry
+        </div>
+        <button class="seller-btn">NGOs</button>
+        <div class="links">
+            <a href="ngo-homepage.html">Home</a>
+            <a href="aboutus.html">About</a>
+            <a href="contactus.html">Contact</a>
+            <a href="terms.html">Terms & Privacy</a>
+            <div class="profile-icon">👤</div>
+        </div>
+        <img class="fruits-img-topright" src="fruits.png" alt="Fruits Banner">
+    </div>
+
+    <div class="banner">
+        <div class="banner-content">
+            <h1>Save More, Waste Less</h1>
+            <h2>-Sharing surplus , spreading smiles-</h2>
+        </div>
+    </div>
+
+    <div class="main-section">
+        <div class="main-cards">
+            <div class="card">
+                <img src="availabledonations.jpg" alt="Basket of items">
+                <div style="margin-top: 14px; font-weight: bold;">
+                    Available Donations
+                </div>
+                <a href="availabledonations.html" class="card-btn">Claim Now</a>
+            </div>
+
+            <div class="card">
+                <img src="claimdonations.jpg" alt="Customer Claims">
+                <div style="margin-top: 14px; font-weight: bold;">
+                    Claimed Donations
+                </div>
+                <a href="claimdonations.html" class="card-btn">Preview</a>
+            </div>
+        </div>
+
+        <div class="side-col">
+            <div class="side-widget">
+                <h4>Pending</h4>
+                <p>2</p>
+            </div>
+            <div class="side-widget">
+                <h4>Coordinated</h4>
+                <p>1</p>
+            </div>
+        </div>
+    </div>
+    <div id="profile-slide" class="profile-slide hidden" aria-label="Profile menu">
+  <div class="slide-header">
+    <h3>Welcome, User!</h3>
+    <button onclick="toggleProfileSlide()" class="close-slide">×</button>
+  </div>
+  <ul class="slide-options">
+    <li onclick="window.location.href='ngo-profile.html'">👤 Profile</li>
+    <li onclick="window.location.href='settings.html'">⚙ Settings</li>
+   <li onclick="showLogoutModal()">🚪 Logout</li>
+  </ul>
+</div>
+
+
+<!-- ⚠ Logout Confirmation Modal -->
+<div id="logoutModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); z-index: 999;">
+  <div style="background-color: white; padding: 30px; border-radius: 10px; width: 300px; margin: 15% auto; text-align: center;">
+    <p style="font-size: 18px; margin-bottom: 20px;">Are you sure you want to logout?</p>
+    <button onclick="confirmLogout()" style="background-color: #c62828; color: white; padding: 10px 20px; border: none; border-radius: 5px; margin-right: 10px;">Logout</button>
+    <button onclick="closeLogoutModal()" style="background-color: #ddd; color: #333; padding: 10px 20px; border: none; border-radius: 5px;">Cancel</button>
+  </div>
+</div>
+</body>
+
+
+</html><script>
+function toggleProfileSlide() {
+  const slide = document.getElementById('profile-slide');
+  slide.classList.toggle('visible');
+  slide.classList.toggle('hidden');
+}
+
+document.querySelector('.profile-icon').addEventListener('click', toggleProfileSlide);
+
+</script>
+<script>
+  function showLogoutModal() {
+    document.getElementById("logoutModal").style.display = "block";
+  }
+
+  function closeLogoutModal() {
+    document.getElementById("logoutModal").style.display = "none";
+  }
+
+  function confirmLogout() {
+    // Optional: clear sessionStorage/localStorage here
+    window.location.href = "login.html"; // Replace with your actual login page
+  }
+</script>
+</script>

@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NearXpiry - Contact Us</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background-color: #f4fff4;
+      color: #1b3b2f;
+      animation: fadeIn 0.8s ease-in;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes slideInDown {
+      from { transform: translateY(-50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    @keyframes slideInLeft {
+      from { transform: translateX(-80px); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+
+    @keyframes slideInRight {
+      from { transform: translateX(80px); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+
+    @keyframes slideInUp {
+      from { transform: translateY(50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+      40% { transform: translateY(-10px); }
+      60% { transform: translateY(-5px); }
+    }
+
+    header {
+      background-color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      animation: slideInDown 0.6s ease-out;
+    }
+
+    .logo-title {
+      display: flex;
+      align-items: center;
+      animation: slideInLeft 0.8s ease-out 0.2s both;
+    }
+
+    .logo-title img {
+      height: 50px;
+      margin-right: 0.6rem;
+    }
+
+    .logo-title h1 {
+      font-size: 1.5rem;
+      color: #2e7d32;
+      margin: 0;
+    }
+
+    nav {
+      display: flex;
+      gap: 3rem;
+      animation: slideInRight 0.8s ease-out 0.2s both;
+    }
+
+    nav a {
+      color: #2e7d32;
+      text-decoration: none;
+      font-weight: 600;
+      padding: 4px 8px;
+      transition: all 0.3s ease;
+    }
+
+    nav a:hover {
+      transform: translateY(-2px);
+    }
+
+    nav a.active {
+      background-color: #2e7d32;
+      color: white;
+      border-radius: 4px;
+    }
+
+    .banner {
+      background-color: #dcedc8;
+      padding: 2rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      animation: slideInUp 0.8s ease-out 0.4s both;
+    }
+
+    .banner-text {
+      max-width: 500px;
+      animation: slideInLeft 0.8s ease-out 0.6s both;
+    }
+
+    .banner-text h2 {
+      font-size: 2rem;
+      color: #2e7d32;
+      margin-bottom: 0.5rem;
+    }
+
+    .banner-text p {
+      font-size: 1rem;
+      color: #1b3b2f;
+      margin-bottom: 1rem;
+    }
+
+    .banner-text .slogan {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: black;
+    }
+
+    .illustration {
+      width: 350px;
+      height: 200;
+      animation: slideInRight 0.8s ease-out 0.6s both;
+      transition: transform 0.3s ease;
+    }
+
+    .illustration:hover {
+      transform: scale(1.05);
+    }
+
+    .info-boxes {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+      padding: 2rem;
+    }
+
+    .box {
+      background-color: #e8f5e9;
+      border: 1px solid #c8e6c9;
+      border-radius: 8px;
+      padding: 1.5rem;
+      width: 300px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      text-align: center;
+      animation: slideInUp 0.6s ease-out calc(0.8s + var(--box-delay, 0s)) both;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .box:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+
+    .box:nth-child(1) { --box-delay: 0.1s; }
+    .box:nth-child(2) { --box-delay: 0.2s; }
+    .box:nth-child(3) { --box-delay: 0.3s; }
+
+    .box i {
+      font-size: 2rem;
+      color: #2e7d32;
+      margin-bottom: 0.5rem;
+      animation: bounce 2s infinite;
+    }
+
+    .box p {
+      font-size: 0.95rem;
+      line-height: 1.4;
+      color: #1b3b2f;
+    }
+
+    .box strong {
+      display: block;
+      margin-top: 0.5rem;
+      font-weight: 600;
+      color: #2e7d32;
+    }
+
+    footer {
+      background-color: #1b5e20;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 768px) {
+      .banner {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .illustration {
+        margin-top: 1rem;
+        width: 90%;
+      }
+
+      .info-boxes {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo-title">
+      <img src="nearexpirylogo.png" alt="NearXpiry Logo">
+      <h1>NearXpiry</h1>
+    </div>
+    <nav>
+      <a href="customer-homepage.html">Home</a>
+      <a href="aboutus.html">About</a>
+      <a href="contactus.html" class="active">Contact</a>
+      <a href="terms.html">Terms & Privacy</a>
+    </nav>
+  </header>
+
+  <section class="banner">
+    <div class="banner-text">
+      <h2>Contact Us</h2>
+      <p>We are here to help and connect sellers, customers and NGO's connect together.</p>
+      <p class="slogan">Save More, Waste Less - Shop Near Expiry Deals</p>
+    </div>
+    <img src="contactus.png" alt="Contact Illustration" class="illustration" />
+  </section>
+
+  <section class="info-boxes">
+    <div class="box">
+      <i>📞</i>
+      <strong>+91-9182736530</strong>
+      <p>Have any queries or suggestions? Reach out to us.</p>
+    </div>
+    <div class="box">
+      <i>📧</i>
+      <p>For any questions or feedback, kindly mail us at</p>
+      <strong>nearxpiry@gmail.com</strong>
+    </div>
+    <div class="box">
+      <i>📍</i>
+      <p>Visit us at:</p>
+      <strong>Department of Computer Science at MOP Vaishnav College, Nungambakkam Chennai-34</strong>
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2025 NearXpiry. Built for a greener tomorrow 🌱
+  </footer>
+</body>
+</html>

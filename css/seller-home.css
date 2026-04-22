@@ -1,0 +1,111 @@
+body {
+  margin: 0;
+  font-family: "Segoe UI", Roboto, sans-serif;
+  background: #f0fff0;
+  color: #222;
+}
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: white;
+  padding: 16px 32px;
+  border-bottom: 1px solid #ccc;
+}
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+}
+nav a {
+  margin: 0 12px;
+  text-decoration: none;
+  color: #222;
+}
+.nav-icons .icon {
+  margin-left: 12px;
+  font-size: 18px;
+}
+.banner {
+  background: #d4f5d4;
+  padding: 24px 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.banner h2 {
+  font-size: 20px;
+  font-weight: bold;
+}
+.add-product {
+  background: #27a745;
+  color: white;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+}
+.stats {
+  display: flex;
+  justify-content: space-around;
+  padding: 16px 32px;
+  background: #fff;
+}
+.stat {
+  background: #e7f5e8;
+  padding: 12px;
+  border-radius: 8px;
+  font-weight: bold;
+}
+.dashboard {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 24px;
+  padding: 32px;
+}
+.listings, .orders, .donations {
+  background: white;
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0 0 4px rgba(0,0,0,0.1);
+}
+.item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+.item button {
+  margin-left: 8px;
+  background: #27a745;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.orders ul {
+  list-style: none;
+  padding: 0;
+}
+.orders li {
+  margin-bottom: 8px;
+}
+.donations button {
+  display: block;
+  margin-top: 12px;
+  background: #f4a300;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.image-right {
+  position: absolute;
+  top: 100px;
+  right: 20px;
+}
+.image-right img {
+  width: 240px;
+  border-radius: 12px;
+}

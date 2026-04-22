@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>NearXpirY - Add Product</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
+      background: url('backgroundpro.png') no-repeat center center;
+      background-size: cover;
+      animation: fadeIn 0.8s ease-in;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes slideInDown {
+      from { transform: translateY(-50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    @keyframes slideInUp {
+      from { transform: translateY(50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    @keyframes zoomIn {
+      from { transform: scale(0.9); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .overlay {
+      background-color: rgba(255, 255, 255, 0.85);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+    }
+
+    .header {
+      font-size: 32px;
+      font-weight: bold;
+      color: #2e7d32;
+      margin-bottom: 30px;
+      text-align: center;
+      animation: slideInDown 0.8s ease-out 0.2s both;
+    }
+
+    .form-box {
+      background-color: #ffffff;
+      padding: 30px;
+      border-radius: 12px;
+      max-width: 500px;
+      width: 100%;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      animation: zoomIn 0.8s ease-out 0.4s both;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+      animation: slideInUp 0.5s ease-out calc(0.6s + var(--field-delay, 0s)) both;
+    }
+
+    .form-group:nth-child(1) { --field-delay: 0.1s; }
+    .form-group:nth-child(2) { --field-delay: 0.15s; }
+    .form-group:nth-child(3) { --field-delay: 0.2s; }
+    .form-group:nth-child(4) { --field-delay: 0.25s; }
+    .form-group:nth-child(5) { --field-delay: 0.3s; }
+    .form-group:nth-child(6) { --field-delay: 0.35s; }
+    .form-group:nth-child(7) { --field-delay: 0.4s; }
+    .form-group:nth-child(8) { --field-delay: 0.45s; }
+
+    label {
+      font-weight: 600;
+      color: #1b5e20;
+      margin-bottom: 6px;
+      display: block;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    input[type="date"],
+    textarea,
+    input[type="file"] {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 14px;
+    }
+
+    textarea {
+      resize: none;
+      height: 80px;
+    }
+
+    .submit-btn {
+      background-color: #2e7d32;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      width: 100%;
+      animation: slideInUp 0.6s ease-out 1.2s both;
+      transition: all 0.3s ease;
+    }
+
+    .submit-btn:hover {
+      background-color: #1b5e20;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(46, 125, 50, 0.3);
+    }
+
+    @media (max-width: 600px) {
+      .form-box {
+        padding: 20px;
+      }
+
+      .header {
+        font-size: 26px;
+      }
+
+      .submit-btn {
+        font-size: 14px;
+        padding: 10px 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="overlay">
+    <div class="header"> NearXpirY</div>
+
+    <div class="form-box">
+      <form id="uploadForm">
+        <div class="form-group">
+          <label for="productName">Product Name</label>
+          <input type="text" id="productName" name="productName" required>
+        </div>
+
+        <div class="form-group">
+  <label for="category">Category</label>
+  <select id="category" name="category" required>
+    <option value="">-- Select Category --</option>
+    <option value="food&snacks">Snacks and Food</option>
+    <option value="beverages">Beverage</option>
+    <option value="personalcare">Personal Care</option>
+    <option value="others">Others</option>
+  </select>
+</div>
+
+        <div class="form-group">
+          <label for="expiryDate">Expiry Date</label>
+          <input type="date" id="expiryDate" name="expiryDate" required>
+        </div>
+
+        <div class="form-group">
+          <label for="originalPrice">Original Price</label>
+          <input type="number" id="originalPrice" name="originalPrice" required>
+        </div>
+
+        <div class="form-group">
+          <label for="discount">Discount</label>
+          <input type="number" id="discount" name="discount" required>
+        </div>
+
+        <div class="form-group">
+          <label for="quantity">Quantity</label>
+          <input type="number" id="quantity" name="quantity" required>
+        </div>
+
+        <div class="form-group">
+          <label for="description">Description</label>
+          <textarea id="description" name="description" required></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="image">Choose Image</label>
+          <input type="file" id="image" name="image" accept="image/*" required>
+          <img id="preview" style="max-width: 150px; margin-top: 10px; display: none; border-radius: 8px;">
+        </div>
+
+        <button type="submit" class="submit-btn">Add Product</button>
+      </form>
+    </div>
+  </div>
+
+</body>
+</html>
+<script>
+function calculateExpiryDays(dateStr) {
+  const expiry = new Date(dateStr);
+  const today = new Date();
+  const diff = Math.ceil((expiry - today) / (1000 * 60 * 60 * 24));
+  return diff > 0 ? diff : 0;
+}
+
+document.querySelector('#image').addEventListener('change', function(e) {
+  const file = e.target.files[0];
+  const preview = document.querySelector('#preview');
+  
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      preview.src = e.target.result;
+      preview.style.display = 'block';
+    };
+    reader.readAsDataURL(file);
+  }
+});
+
+document.querySelector('#uploadForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+
+  const imageFile = document.querySelector('#image').files[0];
+  if (!imageFile) {
+    alert('Please select an image');
+    return;
+  }
+
+  const reader = new FileReader();
+  reader.onload = async function(e) {
+    const payload = {
+      name: document.querySelector('#productName').value,
+      image: e.target.result,
+      expiryDays: calculateExpiryDays(document.querySelector('#expiryDate').value),
+      discount: parseInt(document.querySelector('#discount').value),
+      category: document.querySelector('#category').value.toLowerCase(),
+      price: parseInt(document.querySelector('#originalPrice').value),
+      originalPrice: parseInt(document.querySelector('#originalPrice').value),
+      quantity: parseInt(document.querySelector('#quantity').value),
+      description: document.querySelector('#description').value
+    };
+
+    try {
+      const res = await fetch('/api/add-product', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+
+      const result = await res.json();
+      alert(result.message);
+      if (result.ok) {
+        document.querySelector('#uploadForm').reset();
+        document.querySelector('#preview').style.display = 'none';
+      }
+    } catch (err) {
+      alert('Upload failed');
+    }
+  };
+  reader.readAsDataURL(imageFile);
+});
+</script>

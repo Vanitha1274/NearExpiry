@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>NGO Signup | NearXpirY</title>
+  <link rel="stylesheet" href="css/signup.css" />
+</head>
+<body class="signup-bg">
+  <div class="signup-wrap">
+    <section class="left-panel">
+      <h2 class="title">SIGN UP</h2>
+      <img src="nearexpirylogo.png" alt="NearXpirY logo" class="brand-logo" />
+      <h1 class="brand-name">NearXpirY</h1>
+      <p class="brand-tagline">Save More, Waste Less</p>
+    </section>
+
+    <section class="right-panel">
+      <form class="signup-form" id="ngoSignup">
+        <input type="text" name="username" placeholder="Username" required />
+        <input type="tel" name="phone" placeholder="Phone No" required />
+        <div class="password-row">
+          <input type="password" name="password" placeholder="Password" required />
+          <input type="password" name="confirm" placeholder="Confirm Password" required />
+        </div>
+        <input type="text" name="organisation" placeholder="Organisation Name" required />
+        <input type="text" name="location" placeholder="Location" required />
+        <button type="submit" class="btn-signup">SIGN UP</button>
+        <p class="signin-link">Already have an account? <a href="index.html">Sign in</a></p>
+      </form>
+    </section>
+  </div>
+  <script>
+document.getElementById('ngoSignup')?.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const f = e.target;
+  const payload = {
+    role: 'ngo',
+    username: f.username.value.trim(),
+    phone: f.phone.value.trim(),
+    password: f.password.value,
+    confirm: f.confirm.value,
+    organisation: f.organisation.value.trim(),
+    location: f.location.value.trim()
+  };
+
+  const res = await fetch('/api/signup', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  });
+  const data = await res.json();
+  alert(data.message);
+  if (res.ok && data.ok) window.location.href = 'login.html';
+});
+</script>
+</body>
+</html>

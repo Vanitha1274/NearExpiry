@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NearXpiry - Welcome</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg ,  #a9f99e,#46add5); /* Forest to mint */
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .logo-img {
+      width: 130px;
+      height: 130px;
+      margin-bottom: 20px;
+      border-radius: 50%;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      animation: zoomInRotate 1.2s ease-in-out forwards;
+      transition: transform 0.3s ease;
+    }
+
+    .logo-img:hover {
+      transform: scale(1.1) rotate(5deg);
+    }
+
+    @keyframes zoomInRotate {
+      from { 
+        opacity: 0; 
+        transform: scale(0.3) rotate(-180deg) translateY(-100px); 
+      }
+      to { 
+        opacity: 1; 
+        transform: scale(1) rotate(0deg) translateY(0); 
+      }
+    }
+
+    .app-name {
+      font-size: 3.2em;
+      font-weight: 700;
+      margin-bottom: 0.3em;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+      opacity: 0;
+      animation: slideInFromLeft 1s ease-in-out forwards;
+      animation-delay: 0.5s;
+    }
+
+    @keyframes slideInFromLeft {
+      from { 
+        opacity: 0; 
+        transform: translateX(-200px) scale(0.8); 
+      }
+      to { 
+        opacity: 1; 
+        transform: translateX(0) scale(1); 
+      }
+    }
+
+    .tagline {
+      font-size: 1.5em;
+      margin-bottom: 2em;
+      font-style: italic;
+      opacity: 0;
+      animation: slideInFromRight 1s ease-in-out forwards;
+      animation-delay: 0.8s;
+    }
+
+    @keyframes slideInFromRight {
+      from { 
+        opacity: 0; 
+        transform: translateX(200px) scale(0.8); 
+      }
+      to { 
+        opacity: 1; 
+        transform: translateX(0) scale(1); 
+      }
+    }
+
+    .enter-btn {
+      background: rgba(255, 255, 255, 0.9);
+      color: #2ecc71;
+      border: none;
+      padding: 1em 2.2em;
+      font-size: 1em;
+      border-radius: 999px; /* Fully rounded corners */
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(5px);
+      transition: all 0.3s ease;
+      opacity: 0;
+      animation: bounceInUp 1.2s ease-in-out forwards;
+      animation-delay: 1.1s;
+    }
+
+    @keyframes bounceInUp {
+      0% { 
+        opacity: 0; 
+        transform: translateY(100px) scale(0.3); 
+      }
+      50% { 
+        opacity: 1; 
+        transform: translateY(-10px) scale(1.05); 
+      }
+      70% { 
+        transform: translateY(5px) scale(0.95); 
+      }
+      100% { 
+        opacity: 1; 
+        transform: translateY(0) scale(1); 
+      }
+    }
+
+    .enter-btn:hover {
+      background: #ffffff;
+      transform: scale(1.1) translateY(-3px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 600px) {
+      .app-name { font-size: 2em; }
+      .tagline { font-size: 1.2em; }
+      .enter-btn { padding: 0.8em 1.6em; font-size: 0.9em; }
+    }
+  </style>
+</head>
+<body>
+  <img src="nearexpirylogo.png" alt="NearXpiry Logo" class="logo-img" />
+  <div class="app-name">NearXpiry</div>
+  <div class="tagline">Reducing Waste. Empowering Communities.</div>
+  <button class="enter-btn" onclick="location.href='login.html'">Get started</button>
+</body>
+</html>

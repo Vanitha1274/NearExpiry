@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Customer Claims - NearXpiry</title>
+  <style>
+    :root{
+      --green:#1e7d3d;
+      --green-dark:#145c2c;
+      --muted:#d8f3dc;
+      --bg:#f8fff8;
+      --card-bg:#ffffff;
+      --radius:12px;
+      --shadow:0 4px 10px rgba(0,0,0,0.08);
+      --gap:14px;
+      --max-width:1100px;
+      --accent:#155724;
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: "Segoe UI", Roboto, Arial, sans-serif;
+      background:var(--bg);
+      color:#222;
+      -webkit-font-smoothing:antialiased;
+      animation: fadeIn 0.8s ease-in;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes slideInDown {
+      from { transform: translateY(-50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    @keyframes slideInUp {
+      from { transform: translateY(30px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    @keyframes slideInLeft {
+      from { transform: translateX(-50px); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+
+    header.site-header{
+      background:var(--green);
+      color:#fff;
+      padding:14px 16px;
+      text-align:center;
+      font-weight:700;
+      font-size:18px;
+      animation: slideInDown 0.6s ease-out;
+    }
+
+    .container{
+      max-width:var(--max-width);
+      margin:24px auto;
+      padding:20px;
+      background:var(--card-bg);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      animation: slideInUp 0.8s ease-out 0.2s both;
+    }
+
+    h1{
+      margin:0 0 12px 0;
+      color:var(--green);
+      text-align:center;
+      font-size:20px;
+      animation: slideInDown 0.6s ease-out 0.4s both;
+    }
+
+    .controls{
+      display:flex;
+      gap:12px;
+      justify-content:center;
+      margin-bottom:16px;
+      flex-wrap:wrap;
+      animation: slideInLeft 0.6s ease-out 0.6s both;
+    }
+
+    .controls input[type="search"],
+    .controls select{
+      padding:10px 12px;
+      border-radius:8px;
+      border:1px solid #e6efe6;
+      min-width:180px;
+      outline:none;
+    }
+
+    .table-wrapper{
+      overflow-x:auto;
+      margin-top:6px;
+      animation: slideInUp 0.8s ease-out 0.8s both;
+    }
+
+    table{
+      width:100%;
+      border-collapse:collapse;
+      min-width:700px;
+    }
+
+    thead th{
+      text-align:center;
+      padding:12px;
+      background:var(--muted);
+      color:#222;
+      font-weight:700;
+      border-bottom:1px solid #e9efe9;
+    }
+
+    tbody td{
+      padding:12px;
+      text-align:center;
+      border-bottom:1px solid #f0f6f0;
+      vertical-align:middle;
+    }
+
+    tbody tr{
+      animation: slideInUp 0.4s ease-out calc(1s + var(--row-delay, 0s)) both;
+      transition: background-color 0.3s ease;
+    }
+    tbody tr:hover{background:#fbfff9}
+
+    .status{
+      display:inline-block;
+      padding:6px 12px;
+      border-radius:20px;
+      font-weight:700;
+      font-size:13px;
+    }
+    .status.pending{background:#fff3cd;color:#856404}
+    .status.approved{background:#d4edda;color:var(--accent)}
+    .status.rejected{background:#f8d7da;color:#721c24}
+
+    .btn-back{
+      display:inline-block;
+      margin-top:18px;
+      padding:10px 16px;
+      background:var(--green);
+      color:#fff;
+      text-decoration:none;
+      border-radius:8px;
+      font-weight:600;
+      animation: slideInLeft 0.6s ease-out 1.2s both;
+      transition: all 0.3s ease;
+    }
+    .btn-back:hover{
+      background:var(--green-dark);
+      transform: translateX(-3px);
+    }
+
+    .empty{
+      padding:30px 12px;
+      color:#6b6b6b;
+      text-align:center;
+      font-weight:600;
+    }
+
+    /* small screens — keep table scrollable */
+    @media (max-width:600px){
+      h1{font-size:18px}
+      .controls input, .controls select{min-width:140px}
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header" role="banner">
+    NearXpiry — Customer Claims
+  </header>
+
+  <main class="container" role="main" aria-labelledby="claims-heading">
+    <h1 id="claims-heading">Customer Claims List</h1>
+
+    <div class="controls" aria-hidden="false">
+      <input id="searchInput" type="search" placeholder="Search customer or item..." aria-label="Search claims">
+      <select id="statusFilter" aria-label="Filter by status">
+        <option value="all">All Statuses</option>
+        <option value="pending">Pending</option>
+        <option value="approved">Approved</option>
+        <option value="rejected">Rejected</option>
+      </select>
+    </div>
+
+    <div class="table-wrapper" role="region" aria-live="polite" aria-label="Claims table">
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">Claim ID</th>
+            <th scope="col">Customer Name</th>
+            <th scope="col">Item</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Date</th>
+            <th scope="col">Status</th>
+          </tr>
+        </thead>
+        <tbody id="claimsBody">
+          <!-- rows injected by JS -->
+        </tbody>
+      </table>
+    </div>
+
+    <a class="btn-back" href="seller-homepage.html" id="backBtn">
+      ← Back to Seller Home
+    </a>
+  </main>
+
+  <script>
+    // Sample data (replace with real data later)
+    const sampleClaims = [
+      { id: "#101", customer: "Rahul Sharma", item: "Milk Pack", quantity: 2, date: "2025-09-28", status: "pending" },
+      { id: "#102", customer: "Anita Verma", item: "Bread", quantity: 1, date: "2025-09-27", status: "approved" },
+      { id: "#103", customer: "Ramesh Kumar", item: "Juice Bottle", quantity: 3, date: "2025-09-27", status: "rejected" }
+    ];
+
+    // Small helper to avoid XSS when injecting text
+    function escapeHTML(str) {
+      return String(str).replace(/[&<>"']/g, s =>
+        ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[s]
+      );
+    }
+
+    // Format ISO date strings to dd-mm-yyyy
+    function formatDateISO(iso) {
+      try {
+        const d = new Date(iso);
+        if (isNaN(d)) return escapeHTML(iso);
+        const dd = String(d.getDate()).padStart(2, '0');
+        const mm = String(d.getMonth() + 1).padStart(2, '0');
+        const yy = d.getFullYear();
+        return `${dd}-${mm}-${yy}`;
+      } catch (e) {
+        return escapeHTML(iso);
+      }
+    }
+
+    // Render claims into the table body
+    function renderClaims(list) {
+      const tbody = document.getElementById('claimsBody');
+      tbody.innerHTML = "";
+
+      if (!Array.isArray(list) || list.length === 0) {
+        tbody.innerHTML = '<tr><td class="empty" colspan="6">No claims found</td></tr>';
+        return;
+      }
+
+      const frag = document.createDocumentFragment();
+      list.forEach(claim => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${escapeHTML(claim.id || '')}</td>
+          <td>${escapeHTML(claim.customer || '')}</td>
+          <td>${escapeHTML(claim.item || '')}</td>
+          <td>${escapeHTML(String(claim.quantity || ''))}</td>
+          <td>${formatDateISO(claim.date || '')}</td>
+          <td>
+            <span class="status ${escapeHTML(claim.status || '')}">
+              ${escapeHTML((claim.status || '').charAt(0).toUpperCase() + (claim.status || '').slice(1))}
+            </span>
+          </td>
+        `;
+        frag.appendChild(tr);
+      });
+
+      tbody.appendChild(frag);
+    }
+
+    // Apply search & status filters
+    function applyFilters() {
+      try {
+        const q = document.getElementById('searchInput').value.trim().toLowerCase();
+        const status = document.getElementById('statusFilter').value;
+        const filtered = sampleClaims.filter(c => {
+          const matchesStatus = status === 'all' || String(c.status).toLowerCase() === status;
+          const matchesQuery = q === '' ||
+            c.customer.toLowerCase().includes(q) ||
+            c.item.toLowerCase().includes(q) ||
+            c.id.toLowerCase().includes(q);
+          return matchesStatus && matchesQuery;
+        });
+        renderClaims(filtered);
+      } catch (err) {
+        console.error("Filter/render error:", err);
+        const tbody = document.getElementById('claimsBody');
+        tbody.innerHTML = '<tr><td class="empty" colspan="6">Could not load claims (check console)</td></tr>';
+      }
+    }
+
+    // Initialize on DOM load
+    document.addEventListener('DOMContentLoaded', () => {
+      try {
+        renderClaims(sampleClaims);
+        document.getElementById('searchInput')
+          .addEventListener('input', () => requestAnimationFrame(applyFilters));
+        document.getElementById('statusFilter')
+          .addEventListener('change', applyFilters);
+      } catch (e) {
+        console.error("Init error:", e);
+        const tbody = document.getElementById('claimsBody');
+        tbody.innerHTML = '<tr><td class="empty" colspan="6">An error occurred while initializing the page. See console.</td></tr>';
+      }
+    });
+  </script>
+</body>
+</html>
